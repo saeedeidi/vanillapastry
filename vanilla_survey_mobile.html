@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#A50021">
+<meta name="description" content="گزارش نظرسنجی مشتریان کافه وانیلا — ۱۵ روز اول شهریور ۱۴۰۵">
+<title>گزارش نظرسنجی مشتریان — کافه وانیلا</title>
+<style>
+:root{
+  --cream:#FBF5E9;--cream-2:#F3E9D6;--ink:#1F2A44;--primary:#A50021;
+  --primary-tint:#F6DEE0;--navy:#1F3A66;--navy-light:#2C4B82;
+  --ink-muted:#5C6472;--rule:#E3DBC9;--white:#fff;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{margin:0;padding:0;background:var(--cream);scroll-behavior:smooth}
+body{margin:0;padding:0;background:var(--cream);color:var(--ink);font-family:Tahoma,Arial,"Segoe UI",sans-serif;line-height:1.75;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
+a{color:inherit}
+.hero{background:var(--primary);color:var(--cream);padding:clamp(30px,7vw,56px) 18px clamp(30px,6vw,44px);position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 2px,transparent 2px 26px);pointer-events:none}
+.hero-inner{width:min(1080px,100%);margin:auto;position:relative;z-index:1}
+.kicker{opacity:.88;font-weight:600;font-size:13px;margin:0 0 8px}
+h1.title{font-size:clamp(24px,6vw,34px);font-weight:800;margin:0 0 6px;line-height:1.45}
+.subtitle{color:#F3D9DB;font-size:13px;margin:0 0 24px;line-height:1.8}
+.hero-stats{display:grid;grid-template-columns:1.25fr repeat(3,1fr);gap:14px;align-items:end;border-top:1px solid rgba(255,255,255,.22);padding-top:22px}
+.hero-big{font-size:clamp(42px,12vw,64px);font-weight:900;color:var(--cream);line-height:1}
+.hero-big-label{font-size:12px;color:#F3D9DB;margin-top:7px;line-height:1.6}
+.hero-mini{display:flex;flex-direction:column;gap:1px;min-width:0}.hero-mini b{font-size:clamp(18px,5vw,22px);font-weight:800}.hero-mini span{font-size:11px;color:#EFC7CA;line-height:1.6}
+.wrap{width:min(1080px,100%);margin:auto;padding:0 14px 42px}
+section{margin-top:34px}.section-title{font-size:18px;font-weight:800;margin:0 0 5px;display:flex;align-items:baseline;gap:8px}.section-title:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--navy);display:inline-block;flex:0 0 auto}.section-desc{color:var(--ink-muted);font-size:12.5px;margin:0 0 15px;line-height:1.8}
+.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}.kpi{background:var(--white);padding:16px 14px}.kpi .num{font-size:26px;font-weight:800;color:var(--ink)}.kpi .num small{font-size:14px;font-weight:600;color:var(--ink-muted)}.kpi .lbl{font-size:12px;color:var(--ink-muted);margin-top:3px;line-height:1.6}.kpi .bar{height:5px;background:var(--cream-2);border-radius:3px;margin-top:9px;overflow:hidden}.kpi .bar>i{display:block;height:100%;background:var(--navy);border-radius:3px}
+.cols{display:grid;grid-template-columns:1fr;gap:14px}.card{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:16px 14px}.card h3{font-size:14px;font-weight:700;margin:0 0 12px}.chart-box{position:relative;height:220px;overflow:hidden}
+.daily-chart{width:100%;height:100%;display:block}.daily-chart text{font-family:Tahoma,Arial,sans-serif}.daily-chart .grid{stroke:#F0E7D4;stroke-width:1}.daily-chart .bar{fill:#1F3A66}.daily-chart .label{fill:#5C6472;font-size:11px}.daily-chart .value{fill:#1F2A44;font-size:10px;font-weight:700}
+.donut-wrap{height:100%;display:flex;align-items:center;justify-content:center;gap:14px}.donut{width:min(170px,48vw);aspect-ratio:1;border-radius:50%;background:conic-gradient(#1F3A66 0 34%,#5C7CA8 34% 65%,#D9CBAA 65% 85%,#D68A93 85% 91%,#A50021 91% 100%);position:relative;flex:0 0 auto}.donut:after{content:"";position:absolute;inset:31%;background:#fff;border-radius:50%}.legend{display:grid;gap:7px;font-size:11.5px;line-height:1.4}.legend-row{display:flex;align-items:center;gap:7px}.legend-dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+.branch-row,.theme-row{display:grid;align-items:center;gap:9px;margin-bottom:11px}.branch-row{grid-template-columns:105px 1fr 34px}.theme-row{grid-template-columns:minmax(120px,170px) 1fr 22px}.branch-row .name,.theme-label{font-size:12px}.branch-row .name{font-weight:600}.track,.theme-track{height:12px;background:var(--cream-2);border-radius:7px;overflow:hidden}.track>i,.theme-track>i{display:block;height:100%;border-radius:7px}.track>i{background:var(--navy)}.theme-track>i{background:var(--primary)}.pct,.theme-count{font-size:11.5px;color:var(--ink-muted);text-align:left}
+.note{font-size:11.5px;color:var(--ink-muted);margin:10px 0 0;line-height:1.9}
+.quotes-grid{display:grid;grid-template-columns:1fr;gap:12px}.quote{font-size:12px;padding:12px 13px;border-radius:8px;margin-bottom:9px;line-height:1.9}.quote.neg{background:var(--primary-tint);border-right:3px solid var(--primary)}
+.rec-list{list-style:none;margin:0;padding:0;display:grid;gap:9px}.rec-list li{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:13px 12px;font-size:12px;display:flex;gap:9px;align-items:flex-start;line-height:1.9}.rec-list li .num{flex:0 0 24px;height:24px;background:var(--primary);color:var(--cream);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+.footnote{margin-top:34px;font-size:10.5px;color:var(--ink-muted);border-top:1px solid var(--rule);padding-top:13px;line-height:1.9}
+@media (min-width:700px){
+  .wrap{padding-left:24px;padding-right:24px}.hero{padding-left:24px;padding-right:24px}.cols{grid-template-columns:1.3fr 1fr}.chart-box{height:260px}.quotes-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(4,1fr)}
+  .kpi{padding:20px}.kpi .num{font-size:30px}.kpi .lbl{font-size:13px}.section-title{font-size:21px}.section-desc{font-size:14px}.card{padding:20px}.card h3{font-size:15px}.quote{font-size:13.2px}.rec-list li{font-size:14px}.footnote{font-size:12px}
+}
+@media (max-width:390px){.hero-stats{grid-template-columns:1.15fr repeat(3,.9fr);gap:8px}.hero-mini span{font-size:10px}.hero-big-label{font-size:10.5px}.branch-row{grid-template-columns:92px 1fr 32px}.theme-row{grid-template-columns:110px 1fr 18px}.theme-label{font-size:11px}.donut-wrap{gap:8px}.legend{font-size:10.5px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <p class="kicker">کافه وانیلا · گزارش نظرسنجی مشتریان</p>
+    <h1 class="title">۱۵ روز اول شهریور ۱۴۰۵</h1>
+    <p class="subtitle">۹۹ پاسخ ثبت‌شده در بازه ۱ تا ۱۵ شهریور، بر مبنای داده‌های داشبورد نظرسنجی</p>
+    <div class="hero-stats">
+      <div><div class="hero-big">٪۶۵</div><div class="hero-big-label">راضی یا بسیار راضی از تجربه کلی</div></div>
+      <div class="hero-mini"><b>۹۹</b><span>پاسخ نظرسنجی</span></div>
+      <div class="hero-mini"><b>۴۸</b><span>نظر مکتوب ثبت‌شده</span></div>
+      <div class="hero-mini"><b>۵</b><span>شعبه فعال</span></div>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+  <section>
+    <h2 class="section-title">شاخص‌های کلیدی</h2>
+    <p class="section-desc">میانگین امتیازها از ۵، بر اساس مجموع پاسخ‌های ثبت‌شده در بازه</p>
+    <div class="kpi-grid">
+      <div class="kpi"><div class="num">۳.۵۹</div><div class="lbl">امتیاز محصولات</div><div class="bar"><i style="width:71.8%"></i></div></div>
+      <div class="kpi"><div class="num">۴.۴۳</div><div class="lbl">برخورد و رفتار پرسنل</div><div class="bar"><i style="width:88.6%"></i></div></div>
+      <div class="kpi"><div class="num">۴.۲۷</div><div class="lbl">محیط و فضای کافه</div><div class="bar"><i style="width:85.4%"></i></div></div>
+      <div class="kpi"><div class="num">۴.۱۳</div><div class="lbl">کیفیت بسته‌بندی</div><div class="bar"><i style="width:82.6%"></i></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">روند و توزیع رضایت</h2>
+    <p class="section-desc">تعداد پاسخ‌ها در هر روز، و توزیع سطح رضایت کلی مشتریان</p>
+    <div class="cols">
+      <div class="card">
+        <h3>روند تعداد پاسخ‌ها به تفکیک روز</h3>
+        <div class="chart-box">
+          <svg class="daily-chart" viewBox="0 0 760 260" preserveAspectRatio="none" role="img" aria-label="روند تعداد پاسخ‌ها به تفکیک روز">
+            <line class="grid" x1="35" y1="220" x2="750" y2="220"/><line class="grid" x1="35" y1="165" x2="750" y2="165"/><line class="grid" x1="35" y1="110" x2="750" y2="110"/><line class="grid" x1="35" y1="55" x2="750" y2="55"/>
+            <g>
+              <rect class="bar" x="45"  y="160" width="29" height="60" rx="3"/><rect class="bar" x="95"  y="115" width="29" height="105" rx="3"/><rect class="bar" x="145" y="115" width="29" height="105" rx="3"/><rect class="bar" x="195" y="130" width="29" height="90" rx="3"/><rect class="bar" x="245" y="115" width="29" height="105" rx="3"/><rect class="bar" x="295" y="100" width="29" height="120" rx="3"/><rect class="bar" x="345" y="100" width="29" height="120" rx="3"/><rect class="bar" x="395" y="145" width="29" height="75" rx="3"/><rect class="bar" x="445" y="70" width="29" height="150" rx="3"/><rect class="bar" x="495" y="175" width="29" height="45" rx="3"/><rect class="bar" x="545" y="40" width="29" height="180" rx="3"/><rect class="bar" x="595" y="100" width="29" height="120" rx="3"/><rect class="bar" x="645" y="85" width="29" height="135" rx="3"/><rect class="bar" x="695" y="145" width="29" height="75" rx="3"/>
+            </g>
+            <g class="value">
+              <text x="59" y="152" text-anchor="middle">۴</text><text x="109" y="107" text-anchor="middle">۷</text><text x="159" y="107" text-anchor="middle">۷</text><text x="209" y="122" text-anchor="middle">۶</text><text x="259" y="107" text-anchor="middle">۷</text><text x="309" y="92" text-anchor="middle">۸</text><text x="359" y="92" text-anchor="middle">۸</text><text x="409" y="137" text-anchor="middle">۵</text><text x="459" y="62" text-anchor="middle">۱۰</text><text x="509" y="167" text-anchor="middle">۳</text><text x="559" y="32" text-anchor="middle">۱۲</text><text x="609" y="92" text-anchor="middle">۸</text><text x="659" y="77" text-anchor="middle">۹</text><text x="709" y="137" text-anchor="middle">۵</text>
+            </g>
+            <g class="label">
+              <text x="59" y="242" text-anchor="middle">۰۱</text><text x="159" y="242" text-anchor="middle">۰۳</text><text x="259" y="242" text-anchor="middle">۰۵</text><text x="359" y="242" text-anchor="middle">۰۷</text><text x="459" y="242" text-anchor="middle">۰۹</text><text x="559" y="242" text-anchor="middle">۱۱</text><text x="659" y="242" text-anchor="middle">۱۳</text><text x="709" y="242" text-anchor="middle">۱۴</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="card">
+        <h3>توزیع سطح رضایت کلی</h3>
+        <div class="chart-box donut-wrap">
+          <div class="donut" aria-label="بسیار راضی ۳۴ درصد، راضی ۳۱ درصد، متوسط ۲۰ درصد، ناراضی ۶ درصد، بسیار ناراضی ۹ درصد"></div>
+          <div class="legend">
+            <div class="legend-row"><span class="legend-dot" style="background:#1F3A66"></span>بسیار راضی: ۳۴٪</div>
+            <div class="legend-row"><span class="legend-dot" style="background:#5C7CA8"></span>راضی: ۳۱٪</div>
+            <div class="legend-row"><span class="legend-dot" style="background:#D9CBAA"></span>متوسط: ۲۰٪</div>
+            <div class="legend-row"><span class="legend-dot" style="background:#D68A93"></span>ناراضی: ۶٪</div>
+            <div class="legend-row"><span class="legend-dot" style="background:#A50021"></span>بسیار ناراضی: ۹٪</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">سهم شعبه‌ها از پاسخ‌ها</h2>
+    <p class="section-desc">بر مبنای نمونه ۷۰ پاسخی از مجموع ۹۹ پاسخ که اطلاعات شعبه در آن ثبت شده است</p>
+    <div class="card">
+      <div class="branch-row"><div class="name">وانیلا فرشته</div><div class="track"><i style="width:34%"></i></div><div class="pct">٪۳۴</div></div>
+      <div class="branch-row"><div class="name">وانیلا جردن</div><div class="track"><i style="width:27%"></i></div><div class="pct">٪۲۷</div></div>
+      <div class="branch-row"><div class="name">وانیلا پاسداران</div><div class="track"><i style="width:16%"></i></div><div class="pct">٪۱۶</div></div>
+      <div class="branch-row"><div class="name">وانیلا اقدسیه</div><div class="track"><i style="width:13%"></i></div><div class="pct">٪۱۳</div></div>
+      <div class="branch-row"><div class="name">وانیلا سنایی</div><div class="track"><i style="width:10%"></i></div><div class="pct">٪۱۰</div></div>
+      <p class="note">شعبه‌های «فرشته» و «جردن» بیشترین حجم پاسخ را داشته‌اند. پایین‌ترین امتیازهای کیفیت بسته‌بندی (۱ از ۵) نیز به‌طور مکرر در شعبه «فرشته» ثبت شده‌اند.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">موضوعات اصلی در نظرات مکتوب</h2>
+    <p class="section-desc">پرتکرارترین موضوعات میان ۴۸ نظر مکتوب ثبت‌شده</p>
+    <div class="card">
+      <div class="theme-row"><div class="theme-label">گرانی / بالا بودن قیمت‌ها نسبت به کیفیت</div><div class="theme-track"><i style="width:100%"></i></div><div class="theme-count">۱۴</div></div>
+      <div class="theme-row"><div class="theme-label">کیفیت پایین قهوه و نوشیدنی‌های گرم</div><div class="theme-track"><i style="width:78.6%"></i></div><div class="theme-count">۱۱</div></div>
+      <div class="theme-row"><div class="theme-label">بیاتی یا کهنه بودن کیک و شیرینی</div><div class="theme-track"><i style="width:28.6%"></i></div><div class="theme-count">۴</div></div>
+      <div class="theme-row"><div class="theme-label">تاخیر در سرویس‌دهی یا مشکل صندوق</div><div class="theme-track"><i style="width:28.6%"></i></div><div class="theme-count">۴</div></div>
+      <div class="theme-row"><div class="theme-label">کمبود اقلام منو</div><div class="theme-track"><i style="width:21.4%"></i></div><div class="theme-count">۳</div></div>
+      <div class="theme-row"><div class="theme-label">نبود اینترنت وای‌فای</div><div class="theme-track"><i style="width:7.1%"></i></div><div class="theme-count">۱</div></div>
+      <div class="theme-row" style="margin-bottom:0"><div class="theme-label">بسته‌بندی نامناسب کیک</div><div class="theme-track"><i style="width:7.1%"></i></div><div class="theme-count">۱</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">نمونه بازخوردهای منفی قابل توجه</h2>
+    <div class="quotes-grid">
+      <div class="quote neg">«قهوه نبود، شیر گرم بود و توی قهوه‌م اشغال بود... اگه دور نبودم حتما قهوه رو بهتون پس می‌دادم» — امتیاز محصول: ۱</div>
+      <div class="quote neg">«۱۵ تا کارمند دارید توی این شعبه و هم سفارش غلط اومد... و هم با ۵۰ دقیقه تاخیر!» — امتیاز محیط: ۴</div>
+      <div class="quote neg">«کیک به اسم پرک بادام بود ولی داخل دریغ از بادام... فقط پیشرفتی که کردین از قیمت بود متاسفانه»</div>
+      <div class="quote neg">«قیمت‌ها بسیار و به‌نحو بی‌ربطی زیاد شده‌اند... برای خرید دو قطعه کیک کوچک یک میلیون تومان هزینه شود بسیار نامعقول است»</div>
+      <div class="quote neg">«معمولا دستگاه پوز صبح‌ها مشکل داره و من دوبار با این مشکل مواجه شدم»</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">پیشنهادات</h2>
+    <ul class="rec-list">
+      <li><span class="num">۱</span>بازبینی کیفیت و ثبات طعم قهوه و نوشیدنی‌های گرم، که بیشترین انتقاد مکتوب پس از قیمت را به خود اختصاص داده است.</li>
+      <li><span class="num">۲</span>شفاف‌سازی رابطه قیمت-کیفیت برای محصولاتی مانند کیک، به‌ویژه با توجه به تکرار انتقاد از گرانی در کنار افت کیفیت.</li>
+      <li><span class="num">۳</span>بررسی فرآیند سرویس‌دهی در ساعات شلوغ برای کاهش تاخیر و خطای سفارش، و اطلاع‌رسانی بهتر به مشتریان درباره نحوه سفارش‌گیری.</li>
+      <li><span class="num">۴</span>بررسی اختصاصی فرآیند بسته‌بندی در شعبه فرشته، با توجه به تکرار امتیاز بسیار پایین کیفیت بسته‌بندی در پاسخ‌های این شعبه.</li>
+    </ul>
+  </section>
+
+  <p class="footnote">منبع داده: داشبورد نظرسنجی مشتریان کافه وانیلا، بازه ۱ تا ۱۵ شهریور ۱۴۰۵. سهم شعبه‌ها، توزیع رضایت کلی و کیفیت بسته‌بندی بر مبنای نمونه‌ای ۷۰ پاسخی از مجموع ۹۹ پاسخ محاسبه شده‌اند.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>گزارش شناسایی نیازهای مدیریت عملکرد کسب‌وکار — وانیلا</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crimson:#A50021;
+    --crimson-deep:#7A0018;
+    --navy:#1B2A4A;
+    --navy-light:#2E4067;
+    --cream:#F3EBDA;
+    --cream-deep:#E9DDC3;
+    --ink:#221C1A;
+    --paper:#FBF7EF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Vazirmatn', sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.8;
+  }
+  .wrap{
+    max-width:960px;
+    margin:0 auto;
+    padding:0 24px 90px;
+  }
+
+  /* ===== Masthead ===== */
+  .masthead{
+    background:var(--crimson);
+    color:var(--cream);
+    padding:46px 24px 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .masthead::after{
+    content:"";
+    position:absolute;
+    inset-inline-end:-60px;
+    top:-60px;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--navy) 0%, transparent 70%);
+    opacity:.35;
+  }
+  .masthead .inner{
+    max-width:960px;
+    margin:0 auto;
+    position:relative;
+    z-index:1;
+  }
+  .eyebrow-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    border-bottom:1px solid rgba(243,235,218,.3);
+    padding-bottom:16px;
+    margin-bottom:28px;
+    font-size:14px;
+    color:rgba(243,235,218,.8);
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .masthead h1{
+    font-size:clamp(26px,4vw,38px);
+    font-weight:800;
+    margin:0 0 14px;
+    letter-spacing:-.5px;
+    max-width:680px;
+  }
+  .masthead .sub{
+    font-size:16px;
+    color:rgba(243,235,218,.85);
+    max-width:620px;
+  }
+  .goal-line{
+    margin-top:26px;
+    padding-top:20px;
+    border-top:1px solid rgba(243,235,218,.25);
+    font-size:14.5px;
+    color:var(--cream);
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+  .goal-line b{
+    color:#fff;
+    white-space:nowrap;
+  }
+
+  /* ===== Key message box ===== */
+  .key-message{
+    background:var(--navy);
+    color:var(--cream);
+    padding:28px 26px;
+    border-radius:6px;
+    margin-top:0;
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    position:relative;
+  }
+  .key-message .mark{
+    font-size:44px;
+    font-weight:900;
+    color:var(--crimson);
+    line-height:1;
+    flex:none;
+    opacity:.9;
+  }
+  .key-message .txt .lbl{
+    font-size:12.5px;
+    letter-spacing:.5px;
+    color:rgba(243,235,218,.6);
+    margin-bottom:8px;
+  }
+  .key-message .txt p{
+    margin:0;
+    font-size:16.5px;
+    font-weight:500;
+    color:var(--cream);
+  }
+
+  /* ===== Sections ===== */
+  .section{margin-top:56px;}
+  .section-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:20px;
+  }
+  .section-head .bar{
+    width:6px;height:28px;
+    background:var(--crimson);
+    border-radius:2px;
+    flex:none;
+  }
+  .section-head h2{
+    font-size:22px;
+    font-weight:700;
+    color:var(--navy);
+    margin:0;
+  }
+  .section-note{
+    color:#6b6058;
+    font-size:15px;
+    max-width:680px;
+    margin:0 0 24px;
+  }
+  .lead{
+    font-size:16px;
+    color:#3a332f;
+    max-width:760px;
+  }
+
+  /* ===== Domain overview grid ===== */
+  .domain-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+  }
+  .domain-chip{
+    background:var(--cream);
+    border-top:4px solid var(--crimson);
+    border-radius:4px;
+    padding:18px 16px;
+  }
+  .domain-chip .id{
+    font-size:12px;
+    font-weight:700;
+    color:var(--crimson-deep);
+    margin-bottom:6px;
+  }
+  .domain-chip .name{
+    font-size:15px;
+    font-weight:700;
+    color:var(--navy);
+    margin-bottom:10px;
+    min-height:42px;
+  }
+  .domain-chip .desc{
+    font-size:13px;
+    color:#5b534c;
+  }
+
+  /* ===== Domain detail cards (A-D) ===== */
+  .domain-card{
+    background:var(--paper);
+    border:1px solid var(--cream-deep);
+    border-radius:6px;
+    overflow:hidden;
+    margin-bottom:26px;
+  }
+  .domain-card .head{
+    background:var(--navy);
+    color:var(--cream);
+    padding:18px 22px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .domain-card .head .letter{
+    width:34px;height:34px;
+    background:var(--crimson);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:15px;
+    flex:none;
+    color:#fff;
+  }
+  .domain-card .head .title{
+    font-size:17px;
+    font-weight:700;
+  }
+  .domain-card .head .title small{
+    display:block;
+    font-weight:400;
+    font-size:12.5px;
+    color:rgba(243,235,218,.7);
+    margin-top:2px;
+  }
+  .domain-card .body{
+    padding:22px 22px 24px;
+  }
+  .domain-card .definition{
+    background:var(--cream);
+    border-inline-start:3px solid var(--crimson);
+    padding:12px 16px;
+    font-size:14.5px;
+    color:#453e38;
+    border-radius:0 4px 4px 0;
+    margin-bottom:20px;
+  }
+  .domain-card .definition b{color:var(--navy);}
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:26px;
+  }
+  .two-col h4{
+    font-size:13.5px;
+    color:var(--crimson-deep);
+    margin:0 0 10px;
+    font-weight:700;
+  }
+  .plain-list{
+    list-style:none;
+    margin:0;padding:0;
+    font-size:14.5px;
+    color:#3a332f;
+  }
+  .plain-list li{
+    position:relative;
+    padding-inline-start:16px;
+    margin-bottom:9px;
+  }
+  .plain-list li::before{
+    content:"";
+    position:absolute;
+    right:0;top:9px;
+    width:6px;height:6px;
+    background:var(--crimson);
+    border-radius:1px;
+  }
+  html[dir="rtl"] .plain-list li::before{
+    right:0;
+  }
+  .outputs-row{
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px dashed var(--cream-deep);
+  }
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:10px;
+  }
+  .tag{
+    background:var(--cream);
+    color:var(--navy);
+    font-size:12.5px;
+    font-weight:600;
+    padding:6px 12px;
+    border-radius:20px;
+    border:1px solid var(--cream-deep);
+  }
+
+  /* ===== Flow chain ===== */
+  .chain{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+  .chain-step{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:20px;
+    align-items:stretch;
+    position:relative;
+    padding-bottom:26px;
+  }
+  .chain-step:not(:last-child)::before{
+    content:"";
+    position:absolute;
+    top:38px; bottom:0;
+    right:74px;
+    width:2px;
+    background:var(--cream-deep);
+  }
+  html[dir="rtl"] .chain-step:not(:last-child)::before{ right:74px; left:auto; }
+  .chain-step .tag-col{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .chain-step .dot{
+    width:38px;height:38px;
+    border-radius:50%;
+    background:var(--crimson);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;
+    font-size:14px;
+    margin-bottom:8px;
+    flex:none;
+    position:relative;
+    z-index:1;
+  }
+  .chain-step .stage-label{
+    font-size:11.5px;
+    color:#8a8078;
+    font-weight:600;
+  }
+  .chain-step .content{
+    background:var(--cream);
+    border-radius:6px;
+    padding:16px 18px;
+  }
+  .chain-step .content .step-title{
+    font-weight:700;
+    color:var(--navy);
+    font-size:15.5px;
+    margin-bottom:4px;
+  }
+  .chain-step .content .step-detail{
+    font-size:13px;
+    color:#5b534c;
+    margin-bottom:8px;
+  }
+  .chain-step .content .step-effect{
+    font-size:13px;
+    color:var(--crimson-deep);
+    font-weight:600;
+  }
+
+  .flow-logic{
+    margin-top:8px;
+    background:var(--navy);
+    color:var(--cream);
+    padding:18px 20px;
+    border-radius:6px;
+    font-size:13.5px;
+    line-height:2;
+    text-align:center;
+  }
+
+  /* ===== Phases roadmap ===== */
+  .phases{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .phase-row{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:18px;
+    background:var(--cream);
+    border-radius:6px;
+    padding:16px 18px;
+    align-items:center;
+  }
+  .phase-row .num{
+    font-size:13px;
+    font-weight:800;
+    color:#fff;
+    background:var(--crimson);
+    padding:8px 10px;
+    border-radius:4px;
+    text-align:center;
+  }
+  .phase-row .txt .ph-title{
+    font-weight:700;
+    color:var(--navy);
+    font-size:14.5px;
+    margin-bottom:4px;
+  }
+  .phase-row .txt .ph-desc{
+    font-size:13.5px;
+    color:#4a4239;
+  }
+
+  /* ===== Data checklist ===== */
+  .data-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
+  .data-card{
+    background:var(--paper);
+    border:1px solid var(--cream-deep);
+    border-radius:6px;
+    padding:16px 18px;
+  }
+  .data-card .dtitle{
+    font-size:14px;
+    font-weight:700;
+    color:var(--crimson-deep);
+    margin-bottom:8px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--cream-deep);
+  }
+  .data-card .dfields{
+    font-size:13px;
+    color:#4a4239;
+  }
+
+  /* ===== Decision box ===== */
+  .decision-box{
+    background:var(--crimson);
+    color:#fff;
+    padding:28px 26px;
+    border-radius:6px;
+    margin-top:10px;
+  }
+  .decision-box .lbl{
+    font-size:12.5px;
+    letter-spacing:.5px;
+    color:rgba(255,255,255,.75);
+    margin-bottom:10px;
+  }
+  .decision-box p{
+    margin:0;
+    font-size:16px;
+    line-height:1.9;
+  }
+  .final-note{
+    margin-top:16px;
+    font-size:13.5px;
+    color:#8a8078;
+    background:var(--cream);
+    padding:14px 16px;
+    border-radius:4px;
+    border-inline-start:3px solid var(--navy);
+  }
+
+  .footer{
+    margin-top:60px;
+    padding-top:24px;
+    border-top:1px solid var(--cream-deep);
+    font-size:13px;
+    color:#8a8078;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  @media (max-width:800px){
+    .domain-grid{grid-template-columns:1fr 1fr;}
+    .two-col{grid-template-columns:1fr;gap:16px;}
+    .data-grid{grid-template-columns:1fr 1fr;}
+    .chain-step{grid-template-columns:90px 1fr;gap:12px;}
+    .chain-step:not(:last-child)::before{right:44px;}
+  }
+  @media (max-width:560px){
+    .domain-grid{grid-template-columns:1fr;}
+    .data-grid{grid-template-columns:1fr;}
+    .phase-row{grid-template-columns:1fr;}
+    .chain-step{grid-template-columns:1fr;}
+    .chain-step:not(:last-child)::before{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="inner">
+    <div class="eyebrow-row">
+      <span>گزارش شناسایی نیازها</span>
+      <span>کسب‌وکار: وانیلا</span>
+    </div>
+    <h1>گزارش شناسایی نیازهای مدیریت عملکرد کسب‌وکار</h1>
+    <p class="sub">چارچوبی پیشنهادی برای اتصال فروش، قیمت‌گذاری، خرید، موجودی و سودآوری در یک سیستم واحد تصمیم‌گیری.</p>
+    <div class="goal-line">
+      <b>هدف:</b>
+      <span>ایجاد یک چارچوب یکپارچه برای کنترل هزینه، سودآوری، خرید، موجودی و تصمیم‌گیری مدیریتی</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="key-message" style="margin-top:-1px;">
+    <div class="mark">”</div>
+    <div class="txt">
+      <div class="lbl">پیام اصلی گزارش</div>
+      <p>نیاز مجموعه صرفاً به داشبورد یا گزارش بیشتر نیست؛ نیاز اصلی، یک لایه مدیریتی است که فروش، قیمت‌گذاری، خرید، مصرف، موجودی و سودآوری را به هم متصل کند و از داده به تصمیم برسد.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="bar"></div><h2>خلاصه مدیریتی</h2></div>
+    <p class="lead">این گزارش بر اساس ماهیت کسب‌وکار مجموعه وانیلا و با تمرکز بر نیازهای مدیریتی تهیه شده است. چهار حوزه FP&A، مدیریت درآمد، تحلیل خرید و تحلیل موجودی/زنجیره تأمین، در ظاهر جدا از هم به نظر می‌رسند؛ اما در عمل یک زنجیره واحد از «فروش تا سود» را تشکیل می‌دهند. هدف پیشنهادی، ساختن چهار گزارش مجزا نیست، بلکه ایجاد یک سیستم تصمیم‌گیری یکپارچه است که بتواند انحراف‌ها را شناسایی کند، علت را مشخص کند و اقدام اصلاحی را فعال کند.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="bar"></div><h2>تصویر کلی نیاز پیشنهادی</h2></div>
+    <p class="section-note">چهار حوزه‌ای که این چارچوب را می‌سازند — هر کدام مسئول بخشی از مسیر «فروش تا سود».</p>
+    <div class="domain-grid">
+      <div class="domain-chip">
+        <div class="id">A</div>
+        <div class="name">برنامه‌ریزی و تحلیل مالی (FP&amp;A)</div>
+        <div class="desc">بودجه، Forecast، انحراف و سودآوری</div>
+      </div>
+      <div class="domain-chip">
+        <div class="id">B</div>
+        <div class="name">مدیریت درآمد (Revenue Management)</div>
+        <div class="desc">قیمت، Mix، حاشیه سود و Promotion</div>
+      </div>
+      <div class="domain-chip">
+        <div class="id">C</div>
+        <div class="name">تحلیل خرید و تأمین (Procurement)</div>
+        <div class="desc">قیمت خرید، تأمین‌کننده و Saving</div>
+      </div>
+      <div class="domain-chip">
+        <div class="id">D</div>
+        <div class="name">تحلیل موجودی و زنجیره تأمین</div>
+        <div class="desc">سطح موجودی، مصرف، گردش و کمبود</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A -->
+  <div class="section">
+    <div class="section-head"><div class="bar"></div><h2>جزئیات چهار حوزه</h2></div>
+
+    <div class="domain-card">
+      <div class="head">
+        <div class="letter">A</div>
+        <div class="title">برنامه‌ریزی و تحلیل مالی<small>Financial Planning &amp; Analysis — FP&amp;A</small></div>
+      </div>
+      <div class="body">
+        <div class="definition"><b>تعریف مدیریتی:</b> ساختن یک مدل منظم برای پاسخ به سه سؤال: «کجا هستیم؟»، «چرا اینجا هستیم؟» و «با روند فعلی احتمالاً کجا می‌رسیم؟»</div>
+        <div class="two-col">
+          <div>
+            <h4>مسائلی که باید حل شود</h4>
+            <ul class="plain-list">
+              <li>نبود مرجع واحد برای مقایسه عملکرد واقعی با بودجه و هدف</li>
+              <li>مشخص نبودن علت انحراف فروش، هزینه و حاشیه سود</li>
+              <li>نبود Forecast به‌روز برای ماه، فصل و سال</li>
+              <li>تصمیم‌گیری بر اساس اعداد تاریخی، بدون سناریوسازی و نگاه رو به جلو</li>
+              <li>فاصله بین داده‌های عملیاتی و صورت سود و زیان مدیریتی</li>
+            </ul>
+          </div>
+          <div>
+            <h4>راهکار پیشنهادی</h4>
+            <ul class="plain-list">
+              <li>طراحی Budget سالانه و ماهانه بر اساس محرک‌های واقعی کسب‌وکار</li>
+              <li>تهیه Forecast ماهانه و Rolling Forecast</li>
+              <li>ساخت گزارش Actual vs Budget vs Forecast</li>
+              <li>تحلیل Variance برای فروش، COGS، Payroll، Overhead و Gross Margin</li>
+              <li>ساخت سناریو برای تغییر قیمت، حجم فروش، هزینه مواد اولیه و ظرفیت تولید</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B -->
+    <div class="domain-card">
+      <div class="head">
+        <div class="letter">B</div>
+        <div class="title">مدیریت درآمد<small>Revenue Management</small></div>
+      </div>
+      <div class="body">
+        <div class="definition"><b>تعریف مدیریتی:</b> بهینه‌سازی قیمت، ترکیب فروش، محصول، زمان و Promotion برای افزایش Revenue، با تمرکز همزمان بر Contribution Margin و Profitability.</div>
+        <div class="two-col">
+          <div>
+            <h4>چرا برای وانیلا مهم است</h4>
+            <ul class="plain-list">
+              <li>همه اقلام از نظر حاشیه سود یکسان نیستند؛ فروش بالاتر الزاماً به معنی سود بیشتر نیست</li>
+              <li>اثر تخفیف و Promotion باید با Contribution سنجیده شود، نه فقط تعداد فاکتور یا Revenue</li>
+              <li>قیمت، قیمت مواد اولیه و Product Mix مستقیماً بر Margin اثر می‌گذارند</li>
+              <li>تصمیم درباره حذف، توسعه یا برجسته‌سازی محصولات باید بر اساس محبوبیت و سودآوری باشد</li>
+            </ul>
+          </div>
+          <div>
+            <h4>راهکار پیشنهادی</h4>
+            <ul class="plain-list">
+              <li>تحلیل Sales Mix و Contribution Margin به تفکیک محصول، دسته، شعبه و بازه زمانی</li>
+              <li>Menu/Product Engineering بر مبنای Popularity × Profitability</li>
+              <li>تحلیل Price Elasticity به‌صورت عملیاتی و با آزمون‌های کنترل‌شده</li>
+              <li>ارزیابی اثر Promotion بر Revenue، Gross Margin و Contribution</li>
+              <li>ساخت چارچوب Pricing با درنظرگرفتن Cost، Margin Target و رفتار مشتری</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div class="domain-card">
+      <div class="head">
+        <div class="letter">C</div>
+        <div class="title">تحلیل خرید و تأمین<small>Procurement Analytics</small></div>
+      </div>
+      <div class="body">
+        <div class="definition"><b>تعریف مدیریتی:</b> تبدیل خرید از یک فعالیت اجرایی به یک فرآیند قابل‌اندازه‌گیری که در آن قیمت، کیفیت، تحویل، شرایط تأمین و اثر خرید بر بهای تمام‌شده کنترل می‌شود.</div>
+        <div class="two-col">
+          <div>
+            <h4>مسائل هدف</h4>
+            <ul class="plain-list">
+              <li>خرید با قیمت‌های متفاوت برای اقلام مشابه</li>
+              <li>نبود دید شفاف از Purchase Price Variance</li>
+              <li>وابستگی زیاد به قضاوت فردی در ارزیابی تأمین‌کننده</li>
+              <li>خرید اضطراری، سفارش بیش از نیاز یا از دست رفتن تخفیف حجمی</li>
+              <li>مشخص نبودن اثر کیفیت خرید بر Yield، Waste و Cost واقعی</li>
+            </ul>
+          </div>
+          <div>
+            <h4>راهکار پیشنهادی</h4>
+            <ul class="plain-list">
+              <li>ساخت Supplier Master و Price History برای اقلام اصلی</li>
+              <li>تحلیل Purchase Price Variance در سطح قلم، تأمین‌کننده و دوره</li>
+              <li>Supplier Scorecard شامل Price، Quality، On-Time Delivery، Fill Rate و Rejection</li>
+              <li>تحلیل Spend به تفکیک دسته خرید و تأمین‌کننده</li>
+              <li>شناسایی Saving Opportunity و اقلام با بیشترین ظرفیت مذاکره یا جایگزینی</li>
+              <li>اتصال قیمت خرید به Recipe Cost و COGS برای سنجش اثر واقعی تصمیم خرید</li>
+            </ul>
+          </div>
+        </div>
+        <div class="outputs-row">
+          <h4 style="margin-bottom:6px;">خروجی‌های پیشنهادی</h4>
+          <div class="tag-row">
+            <span class="tag">داشبورد قیمت خرید و روند آن</span>
+            <span class="tag">رتبه‌بندی تأمین‌کنندگان</span>
+            <span class="tag">گزارش انحراف قیمت خرید</span>
+            <span class="tag">گزارش فرصت‌های Saving</span>
+            <span class="tag">گزارش اقلام با نوسان یا ریسک تأمین بالا</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D -->
+    <div class="domain-card">
+      <div class="head">
+        <div class="letter">D</div>
+        <div class="title">تحلیل موجودی و زنجیره تأمین<small>Inventory &amp; Supply Chain Analytics</small></div>
+      </div>
+      <div class="body">
+        <div class="definition"><b>تعریف مدیریتی:</b> اطمینان از اینکه مقدار و زمان خرید و نگهداری موجودی با الگوی مصرف واقعی هم‌راستا باشد؛ به‌گونه‌ای که هم کمبود کاهش یابد و هم سرمایه اضافه در انبار قفل نشود.</div>
+        <div class="two-col">
+          <div>
+            <h4>مسائل هدف</h4>
+            <ul class="plain-list">
+              <li>موجودی مازاد یا Dead Stock</li>
+              <li>کمبود اقلام بحرانی و خریدهای اضطراری</li>
+              <li>فاصله بین موجودی سیستمی و موجودی واقعی</li>
+              <li>نبود شاخص Days of Inventory / Stock Turnover</li>
+              <li>نامشخص بودن Reorder Point و Safety Stock</li>
+              <li>بالا بودن Waste به‌دلیل انقضا، نگهداری نامناسب یا Over-Purchasing</li>
+            </ul>
+          </div>
+          <div>
+            <h4>راهکار پیشنهادی</h4>
+            <ul class="plain-list">
+              <li>ABC Analysis بر اساس ارزش مصرف</li>
+              <li>طبقه‌بندی اقلام Fast / Slow / Dead Moving</li>
+              <li>تعریف Reorder Point و Safety Stock برای اقلام کلیدی</li>
+              <li>تحلیل Days of Inventory و Stock Turnover</li>
+              <li>تحلیل Inventory Variance بین مصرف مورد انتظار و واقعی</li>
+              <li>بررسی ارتباط موجودی با Forecast فروش و برنامه تولید</li>
+              <li>هشدار برای کمبود، مازاد، انقضا و اقلام بدون گردش</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="bar"></div><h2>ارتباط چهار حوزه با یکدیگر</h2></div>
+    <p class="lead" style="margin-bottom:28px;">این چهار حوزه باید به‌صورت یک زنجیره طراحی شوند. هر تصمیم در یک بخش، روی بخش‌های دیگر اثر دارد. برای مثال، قیمت خرید بالاتر فقط مسئله Procurement نیست؛ می‌تواند Recipe Cost، Food Cost، قیمت فروش، Margin و در نهایت Profit را تغییر دهد.</p>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="tag-col"><div class="dot">۱</div><div class="stage-label">Demand Signal</div></div>
+        <div class="content">
+          <div class="step-title">فروش و تقاضا</div>
+          <div class="step-detail">Revenue / Mix / Forecast</div>
+          <div class="step-effect">↓ محرک Forecast</div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="tag-col"><div class="dot">۲</div><div class="stage-label">Plan &amp; Control</div></div>
+        <div class="content">
+          <div class="step-title">A. FP&amp;A</div>
+          <div class="step-detail">Budget / Forecast / P&amp;L</div>
+          <div class="step-effect">↓ Budget و Forecast بر همه تصمیم‌ها اثر می‌گذارد</div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="tag-col"><div class="dot">۳</div><div class="stage-label">Monetize Demand</div></div>
+        <div class="content">
+          <div class="step-title">B. Revenue Management</div>
+          <div class="step-detail">Pricing / Product Mix / Promotion</div>
+          <div class="step-effect">↓ قیمت و Mix روی Revenue و Margin اثر می‌گذارند</div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="tag-col"><div class="dot">۴</div><div class="stage-label">Buy Better</div></div>
+        <div class="content">
+          <div class="step-title">C. Procurement Analytics</div>
+          <div class="step-detail">Supplier / Purchase Price / Saving</div>
+          <div class="step-effect">↓ خرید روی COGS و Recipe Cost اثر می‌گذارد</div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="tag-col"><div class="dot">۵</div><div class="stage-label">Hold &amp; Consume</div></div>
+        <div class="content">
+          <div class="step-title">D. Inventory &amp; Supply Chain</div>
+          <div class="step-detail">Stock / Consumption / Reorder / Waste</div>
+          <div class="step-effect">↓ موجودی و مصرف روی Waste و Variance اثر می‌گذارند</div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="tag-col"><div class="dot">۶</div><div class="stage-label">Financial Translation</div></div>
+        <div class="content">
+          <div class="step-title">هزینه و بهای تمام‌شده</div>
+          <div class="step-detail">COGS / Food Cost / Variance</div>
+          <div class="step-effect">↓ نتیجه تمام تصمیم‌ها در P&amp;L دیده می‌شود</div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="tag-col"><div class="dot">۷</div><div class="stage-label">Management Action</div></div>
+        <div class="content">
+          <div class="step-title">سودآوری و تصمیم مدیریتی</div>
+          <div class="step-detail">Gross Margin / Profit / Action</div>
+          <div class="step-effect">چرخه تصمیم‌گیری و اصلاح</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-logic">
+      تقاضا و فروش → Forecast و Budget → Pricing و Product Mix → برنامه خرید → کنترل موجودی و مصرف → COGS و Gross Margin → تصمیم مدیریتی → بازخورد به Forecast و برنامه‌ریزی
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="bar"></div><h2>پیشنهاد برای پیاده‌سازی</h2></div>
+    <p class="section-note">پیشنهاد می‌شود اجرای این چارچوب به‌صورت مرحله‌ای انجام شود تا مجموعه، پیش از ساخت سیستم‌های پیچیده، ابتدا تعاریف و داده‌های پایه را استاندارد کند.</p>
+    <div class="phases">
+      <div class="phase-row">
+        <div class="num">فاز ۱<br>Baseline</div>
+        <div class="txt"><div class="ph-title">تعریف پایه</div><div class="ph-desc">تعریف KPIها، Master Data، ساختار اقلام، محصولات، تأمین‌کنندگان، مراکز هزینه و منابع داده.</div></div>
+      </div>
+      <div class="phase-row">
+        <div class="num">فاز ۲<br>Visibility</div>
+        <div class="txt"><div class="ph-title">دید و شفافیت</div><div class="ph-desc">راه‌اندازی داشبوردهای پایه برای Sales، Cost، Purchase و Inventory و تعریف Actual vs Target.</div></div>
+      </div>
+      <div class="phase-row">
+        <div class="num">فاز ۳<br>Control</div>
+        <div class="txt"><div class="ph-title">کنترل</div><div class="ph-desc">افزودن Variance Analysis، Threshold، Exception و مشخص‌کردن مسئول هر انحراف.</div></div>
+      </div>
+      <div class="phase-row">
+        <div class="num">فاز ۴<br>Optimization</div>
+        <div class="txt"><div class="ph-title">بهینه‌سازی</div><div class="ph-desc">Pricing، Product Mix، Supplier Saving، Inventory Optimization و Forecasting.</div></div>
+      </div>
+      <div class="phase-row">
+        <div class="num">فاز ۵<br>Mgmt System</div>
+        <div class="txt"><div class="ph-title">سیستم مدیریتی</div><div class="ph-desc">یکپارچه‌سازی همه خروجی‌ها در Business Performance Cockpit و جلسات تصمیم‌گیری دوره‌ای.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="bar"></div><h2>حداقل داده‌های موردنیاز</h2></div>
+    <div class="data-grid">
+      <div class="data-card"><div class="dtitle">Sales</div><div class="dfields">تاریخ، شعبه/کانال، محصول، تعداد، مبلغ، تخفیف</div></div>
+      <div class="data-card"><div class="dtitle">Product / Recipe</div><div class="dfields">محصول، مواد اولیه، مقدار مصرف، Yield، قیمت استاندارد</div></div>
+      <div class="data-card"><div class="dtitle">Purchase</div><div class="dfields">تأمین‌کننده، قلم، مقدار، قیمت، تاریخ، شرایط خرید</div></div>
+      <div class="data-card"><div class="dtitle">Inventory</div><div class="dfields">موجودی اول دوره، ورود، مصرف، انتقال، Waste، موجودی پایان دوره</div></div>
+      <div class="data-card"><div class="dtitle">Finance</div><div class="dfields">هزینه‌ها، مراکز هزینه و اقلام اصلی P&amp;L</div></div>
+      <div class="data-card"><div class="dtitle">Calendar</div><div class="dfields">روز، هفته، ماه، مناسبت و در صورت امکان الگوی تقاضا</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="bar"></div><h2>جمع‌بندی برای مدیریت</h2></div>
+    <div class="decision-box">
+      <div class="lbl">پیشنهاد تصمیم</div>
+      <p>نیاز پیشنهادی مجموعه، ایجاد یک چارچوب یکپارچه «Business Performance» است که چهار قابلیت FP&amp;A، Revenue Management، Procurement Analytics و Inventory &amp; Supply Chain Analytics را به هم متصل کند. این چارچوب می‌تواند از سطح گزارش‌دهی فراتر رود و به یک سیستم کنترل و بهبود مستمر تبدیل شود.</p>
+    </div>
+    <div class="final-note">
+      نکته: این گزارش به‌عنوان چارچوب پیشنهادی تهیه شده و اعداد هدف، Thresholdها و فرمول‌های دقیق KPIها باید پس از بررسی داده‌های واقعی مجموعه تعیین شوند.
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>گزارش شناسایی نیازهای مدیریت عملکرد کسب‌وکار</span>
+    <span>وانیلا</span>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>گزارش مصرف خالص قهوه — کلمبیا و برزیل</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crimson:#A50021;
+    --crimson-deep:#7A0018;
+    --navy:#1B2A4A;
+    --navy-light:#2E4067;
+    --cream:#F3EBDA;
+    --cream-deep:#E9DDC3;
+    --ink:#221C1A;
+    --paper:#FBF7EF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Vazirmatn', sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.75;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px 80px;}
+
+  /* Masthead */
+  .masthead{background:var(--crimson);color:var(--cream);padding:46px 24px 40px;position:relative;overflow:hidden;}
+  .masthead::after{content:"";position:absolute;inset-inline-end:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--navy) 0%, transparent 70%);opacity:.35;}
+  .masthead .inner{max-width:920px;margin:0 auto;position:relative;z-index:1;}
+  .eyebrow-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(243,235,218,.3);
+    padding-bottom:16px;margin-bottom:28px;font-size:14px;color:rgba(243,235,218,.8);flex-wrap:wrap;gap:8px;}
+  .masthead h1{font-size:clamp(26px,4vw,36px);font-weight:800;margin:0 0 10px;letter-spacing:-.5px;max-width:640px;}
+  .masthead .sub{font-size:15.5px;color:rgba(243,235,218,.85);max-width:600px;}
+
+  /* Stat pair */
+  .stat-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:34px;}
+  .stat-card{background:rgba(255,255,255,.08);border:1px solid rgba(243,235,218,.25);border-radius:6px;padding:18px 20px;}
+  .stat-card .coffee-name{font-size:13px;color:rgba(243,235,218,.75);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .stat-card .coffee-name .dot{width:9px;height:9px;border-radius:50%;}
+  .stat-card .row{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;}
+  .stat-card .row .k{font-size:12.5px;color:rgba(243,235,218,.65);}
+  .stat-card .row .v{font-size:22px;font-weight:800;color:#fff;}
+  .stat-card .row .v small{font-size:12px;font-weight:500;color:rgba(243,235,218,.75);}
+
+  /* Sections */
+  .section{margin-top:52px;}
+  .section-head{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+  .section-head .bar{width:6px;height:28px;background:var(--crimson);border-radius:2px;flex:none;}
+  .section-head h2{font-size:22px;font-weight:700;color:var(--navy);margin:0;}
+  .section-note{color:#6b6058;font-size:15px;max-width:660px;margin:0 0 24px;}
+
+  /* Table */
+  table.impact{width:100%;border-collapse:collapse;font-size:15px;}
+  table.impact thead th{background:var(--navy);color:var(--cream);font-weight:600;text-align:start;padding:14px 16px;font-size:13.5px;}
+  table.impact thead th:first-child{border-start-start-radius:6px;}
+  table.impact thead th:last-child{border-start-end-radius:6px;}
+  table.impact tbody td{padding:16px 16px;border-bottom:1px solid var(--cream-deep);vertical-align:middle;}
+  table.impact tbody tr:nth-child(odd){background:var(--cream);}
+  table.impact tbody tr:hover{background:#EFE3C7;}
+  table.impact tbody tr.max-row{outline:2px solid var(--crimson);outline-offset:-2px;}
+  table.impact td.month{font-weight:700;color:var(--navy);}
+  table.impact td.num{color:#3a332f;font-weight:600;}
+  .cell-bar-wrap{display:flex;align-items:center;gap:10px;}
+  .cell-bar-track{flex:1;height:8px;background:var(--cream-deep);border-radius:4px;overflow:hidden;min-width:70px;}
+  .cell-bar-fill{height:100%;border-radius:4px;}
+  .cell-bar-fill.col{background:var(--crimson);}
+  .cell-bar-fill.bra{background:var(--navy);}
+  .badge-max{
+    display:inline-block;margin-inline-start:8px;font-size:11px;font-weight:700;
+    background:var(--crimson);color:#fff;padding:2px 8px;border-radius:10px;
+  }
+
+  /* legend */
+  .legend{display:flex;gap:22px;margin-bottom:18px;font-size:13.5px;color:#5b534c;}
+  .legend .item{display:flex;align-items:center;gap:8px;}
+  .legend .sw{width:12px;height:12px;border-radius:3px;}
+  .legend .sw.col{background:var(--crimson);}
+  .legend .sw.bra{background:var(--navy);}
+
+  /* formula note */
+  .formula-note{
+    background:var(--cream);border-inline-start:3px solid var(--crimson);
+    padding:14px 18px;border-radius:0 4px 4px 0;font-size:14px;color:#453e38;margin-bottom:24px;
+  }
+  .formula-note b{color:var(--navy);}
+
+  .footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--cream-deep);font-size:13px;color:#8a8078;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:640px){
+    .stat-pair{grid-template-columns:1fr;}
+    table.impact{font-size:13.5px;}
+    table.impact thead th, table.impact tbody td{padding:10px 8px;}
+    .cell-bar-track{min-width:40px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="inner">
+    <div class="eyebrow-row">
+      <span>گزارش مصرف قهوه</span>
+      <span>بازه: فروردین تا مرداد</span>
+    </div>
+    <h1>مصرف خالص قهوه کلمبیا و برزیل</h1>
+    <p class="sub">مصرف خالص هر نوع قهوه برابر است با مقدار مصرف ثبت‌شده منهای مقدار برگشتی از مصرف همان قهوه.</p>
+
+    <div class="stat-pair">
+      <div class="stat-card">
+        <div class="coffee-name"><span class="dot" style="background:#E8B4B4;"></span>کلمبیا</div>
+        <div class="row"><span class="k">میانگین مصرف خالص</span><span class="v">۲۲۵.۶</span></div>
+        <div class="row"><span class="k">حداکثر مصرف خالص</span><span class="v">۲۶۱ <small>(تیر)</small></span></div>
+      </div>
+      <div class="stat-card">
+        <div class="coffee-name"><span class="dot" style="background:#A9C0E8;"></span>برزیل</div>
+        <div class="row"><span class="k">میانگین مصرف خالص</span><span class="v">۳۸۲.۶</span></div>
+        <div class="row"><span class="k">حداکثر مصرف خالص</span><span class="v">۴۳۱ <small>(تیر)</small></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="section" style="margin-top:40px;">
+    <div class="section-head"><div class="bar"></div><h2>جدول مصرف خالص ماهانه</h2></div>
+    <div class="formula-note"><b>نحوه محاسبه:</b> مصرف خالص = مقدار مصرف ثبت‌شده − مقدار برگشت از همان مصرف؛ برای هر دو ستون کلمبیا و برزیل.</div>
+    <div class="legend">
+      <div class="item"><span class="sw col"></span>کلمبیا</div>
+      <div class="item"><span class="sw bra"></span>برزیل</div>
+    </div>
+
+    <table class="impact">
+      <thead>
+        <tr>
+          <th>ماه</th>
+          <th>کلمبیا (مصرف خالص)</th>
+          <th>برزیل (مصرف خالص)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="month">فروردین</td>
+          <td class="num"><div class="cell-bar-wrap"><span>۱۴۲</span><span class="cell-bar-track"><span class="cell-bar-fill col" style="width:33%"></span></span></div></td>
+          <td class="num"><div class="cell-bar-wrap"><span>۳۵۴</span><span class="cell-bar-track"><span class="cell-bar-fill bra" style="width:82%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="month">اردیبهشت</td>
+          <td class="num"><div class="cell-bar-wrap"><span>۲۴۳</span><span class="cell-bar-track"><span class="cell-bar-fill col" style="width:56%"></span></span></div></td>
+          <td class="num"><div class="cell-bar-wrap"><span>۳۷۳</span><span class="cell-bar-track"><span class="cell-bar-fill bra" style="width:87%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="month">خرداد</td>
+          <td class="num"><div class="cell-bar-wrap"><span>۲۴۴</span><span class="cell-bar-track"><span class="cell-bar-fill col" style="width:56%"></span></span></div></td>
+          <td class="num"><div class="cell-bar-wrap"><span>۴۱۴</span><span class="cell-bar-track"><span class="cell-bar-fill bra" style="width:96%"></span></span></div></td>
+        </tr>
+        <tr class="max-row">
+          <td class="month">تیر<span class="badge-max">بیشترین مصرف</span></td>
+          <td class="num"><div class="cell-bar-wrap"><span>۲۶۱</span><span class="cell-bar-track"><span class="cell-bar-fill col" style="width:100%"></span></span></div></td>
+          <td class="num"><div class="cell-bar-wrap"><span>۴۳۱</span><span class="cell-bar-track"><span class="cell-bar-fill bra" style="width:100%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="month">مرداد</td>
+          <td class="num"><div class="cell-bar-wrap"><span>۲۳۸</span><span class="cell-bar-track"><span class="cell-bar-fill col" style="width:55%"></span></span></div></td>
+          <td class="num"><div class="cell-bar-wrap"><span>۳۴۱</span><span class="cell-bar-track"><span class="cell-bar-fill bra" style="width:79%"></span></span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>گزارش مصرف خالص قهوه</span>
+    <span>کلمبیا و برزیل</span>
+  </div>
+
+</div>
+
+</body>
+</html>

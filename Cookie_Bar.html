@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>گزارش فروش دسته کوکی و بار</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crimson:#A50021;
+    --crimson-deep:#7A0018;
+    --navy:#1B2A4A;
+    --navy-light:#2E4067;
+    --cream:#F3EBDA;
+    --cream-deep:#E9DDC3;
+    --ink:#221C1A;
+    --paper:#FBF7EF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:'Vazirmatn', sans-serif;background:var(--paper);color:var(--ink);line-height:1.75;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px 80px;}
+
+  /* Masthead */
+  .masthead{background:var(--crimson);color:var(--cream);padding:46px 24px 40px;position:relative;overflow:hidden;}
+  .masthead::after{content:"";position:absolute;inset-inline-end:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--navy) 0%, transparent 70%);opacity:.35;}
+  .masthead .inner{max-width:960px;margin:0 auto;position:relative;z-index:1;}
+  .eyebrow-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(243,235,218,.3);
+    padding-bottom:16px;margin-bottom:28px;font-size:14px;color:rgba(243,235,218,.8);flex-wrap:wrap;gap:8px;}
+  .masthead h1{font-size:clamp(26px,4vw,38px);font-weight:800;margin:0 0 10px;letter-spacing:-.5px;max-width:680px;}
+  .masthead .sub{font-size:15.5px;color:rgba(243,235,218,.85);max-width:600px;}
+
+  .hero-stat{display:flex;align-items:flex-end;gap:24px;margin-top:32px;flex-wrap:wrap;}
+  .hero-stat .figure{font-size:clamp(60px,10vw,96px);font-weight:900;color:#fff;line-height:.85;letter-spacing:-2px;}
+  .hero-stat .figure-label{font-size:15px;color:var(--cream);max-width:260px;padding-bottom:12px;
+    border-inline-start:3px solid rgba(255,255,255,.6);padding-inline-start:14px;}
+
+  .stat-strip{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px;}
+  .stat-card{background:rgba(255,255,255,.08);border:1px solid rgba(243,235,218,.25);border-radius:6px;padding:16px 18px;}
+  .stat-card .k{font-size:12.5px;color:rgba(243,235,218,.7);margin-bottom:6px;}
+  .stat-card .v{font-size:21px;font-weight:800;color:#fff;}
+  .stat-card .v small{font-size:13px;font-weight:500;color:rgba(243,235,218,.75);}
+
+  /* Sections */
+  .section{margin-top:52px;}
+  .section-head{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+  .section-head .bar{width:6px;height:28px;background:var(--crimson);border-radius:2px;flex:none;}
+  .section-head h2{font-size:22px;font-weight:700;color:var(--navy);margin:0;}
+  .section-note{color:#6b6058;font-size:15px;max-width:680px;margin:0 0 24px;}
+
+  /* Table */
+  table.impact{width:100%;border-collapse:collapse;font-size:14.5px;}
+  table.impact thead th{background:var(--navy);color:var(--cream);font-weight:600;text-align:start;padding:14px 16px;font-size:13px;}
+  table.impact thead th:first-child{border-start-start-radius:6px;}
+  table.impact thead th:last-child{border-start-end-radius:6px;}
+  table.impact tbody td{padding:14px 16px;border-bottom:1px solid var(--cream-deep);vertical-align:middle;}
+  table.impact tbody tr:nth-child(odd){background:var(--cream);}
+  table.impact tbody tr:hover{background:#EFE3C7;}
+  table.impact tbody tr.top-row{outline:2px solid var(--crimson);outline-offset:-2px;}
+  table.impact td.product{font-weight:600;color:var(--ink);}
+  table.impact td.num{color:#3a332f;}
+  table.impact td.amount{color:var(--navy);font-weight:700;white-space:nowrap;}
+  .rank-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--cream-deep);color:var(--navy);
+    font-size:11.5px;font-weight:800;margin-inline-end:8px;flex:none;
+  }
+  .top-row .rank-badge{background:var(--crimson);color:#fff;}
+  .share-wrap{display:flex;align-items:center;gap:8px;}
+  .share-track{width:80px;height:7px;background:var(--cream-deep);border-radius:4px;overflow:hidden;flex:none;}
+  .share-fill{height:100%;background:var(--crimson);border-radius:4px;}
+  td.prod-cell{display:flex;align-items:center;}
+
+  .footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--cream-deep);font-size:13px;color:#8a8078;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:640px){
+    .stat-strip{grid-template-columns:1fr;}
+    table.impact{font-size:13px;}
+    table.impact thead th, table.impact tbody td{padding:9px 8px;}
+    .share-track{width:44px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="inner">
+    <div class="eyebrow-row">
+      <span>گزارش فروش تعدادی و مبلغی</span>
+      <span>از ابتدای تیر تا ۲۷ شهریور</span>
+    </div>
+    <h1>فروش دسته کوکی و بار</h1>
+    <p class="sub">سهم هر محصول از فروش دسته کوکی و بار، بر اساس مقدار فروش و فروش خالص، در بازه ابتدای تیر تا ۲۷ شهریور.</p>
+
+    <div class="hero-stat">
+      <div class="figure">٪۳.۳</div>
+      <div class="figure-label">سهم فروش دسته کوکی و بار نسبت به کل فروش مجموعه</div>
+    </div>
+
+    <div class="stat-strip">
+      <div class="stat-card">
+        <div class="k">مجموع مقدار فروش دسته</div>
+        <div class="v">۹.۹۶۴ <small>عدد</small></div>
+      </div>
+      <div class="stat-card">
+        <div class="k">مجموع فروش خالص دسته</div>
+        <div class="v">۲۷.۶۰۰.۲۷۵.۵۱۸ <small>ریال</small></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="section" style="margin-top:40px;">
+    <div class="section-head"><div class="bar"></div><h2>سهم محصولات از فروش دسته</h2></div>
+    <p class="section-note">محصولات به ترتیب سهم از فروش دسته کوکی و بار مرتب شده‌اند. کوکی دبل چاکلت با ٪۱۶.۱ بیشترین سهم را در این دسته دارد.</p>
+
+    <table class="impact">
+      <thead>
+        <tr>
+          <th>محصول</th>
+          <th>مقدار فروش</th>
+          <th>فروش خالص (ریال)</th>
+          <th>سهم از دسته</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="top-row">
+          <td class="product"><div class="prod-cell"><span class="rank-badge">۱</span>کوکی - دبل چاکلت</div></td>
+          <td class="num">۱.۸۵۱</td>
+          <td class="amount">۴.۴۴۶.۷۳۱.۳۷۱</td>
+          <td><div class="share-wrap"><span>٪۱۶.۱</span><span class="share-track"><span class="share-fill" style="width:100%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="product"><div class="prod-cell"><span class="rank-badge">۲</span>کوکی - میکس فینگری بسته ۱۰ تایی</div></td>
+          <td class="num">۳۶۸</td>
+          <td class="amount">۳.۸۷۷.۵۸۴.۱۷۸</td>
+          <td><div class="share-wrap"><span>٪۱۴.۰</span><span class="share-track"><span class="share-fill" style="width:87%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="product"><div class="prod-cell"><span class="rank-badge">۳</span>بار - خرما</div></td>
+          <td class="num">۱.۵۴۶</td>
+          <td class="amount">۳.۱۸۱.۰۹۲.۶۳۱</td>
+          <td><div class="share-wrap"><span>٪۱۱.۵</span><span class="share-track"><span class="share-fill" style="width:71%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="product"><div class="prod-cell"><span class="rank-badge">۴</span>کوکی - پسته و کرنبری</div></td>
+          <td class="num">۱.۰۳۹</td>
+          <td class="amount">۳.۱۵۱.۳۸۳.۱۲۷</td>
+          <td><div class="share-wrap"><span>٪۱۱.۴</span><span class="share-track"><span class="share-fill" style="width:71%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="product"><div class="prod-cell"><span class="rank-badge">۵</span>بار - پروتئین بار شکلات و بادام</div></td>
+          <td class="num">۹۲۷</td>
+          <td class="amount">۲.۹۳۰.۶۵۸.۶۶۵</td>
+          <td><div class="share-wrap"><span>٪۱۰.۶</span><span class="share-track"><span class="share-fill" style="width:66%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="product"><div class="prod-cell"><span class="rank-badge">۶</span>کوکی - پروتئین وی</div></td>
+          <td class="num">۱.۰۲۲</td>
+          <td class="amount">۲.۸۷۷.۴۸۱.۶۹۲</td>
+          <td><div class="share-wrap"><span>٪۱۰.۴</span><span class="share-track"><span class="share-fill" style="width:65%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="product"><div class="prod-cell"><span class="rank-badge">۷</span>کوکی - جو کرنبری</div></td>
+          <td class="num">۱.۵۴۱</td>
+          <td class="amount">۲.۶۱۹.۵۶۷.۱۶۸</td>
+          <td><div class="share-wrap"><span>٪۹.۵</span><span class="share-track"><span class="share-fill" style="width:59%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="product"><div class="prod-cell"><span class="rank-badge">۸</span>بار - پروتئین بار خرما و ارده</div></td>
+          <td class="num">۵۵۲</td>
+          <td class="amount">۱.۵۸۸.۷۰۰.۵۷۰</td>
+          <td><div class="share-wrap"><span>٪۵.۸</span><span class="share-track"><span class="share-fill" style="width:36%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="product"><div class="prod-cell"><span class="rank-badge">۹</span>بار - پروتئین بار نارگیل</div></td>
+          <td class="num">۴۹۵</td>
+          <td class="amount">۱.۴۸۶.۴۷۸.۶۵۶</td>
+          <td><div class="share-wrap"><span>٪۵.۴</span><span class="share-track"><span class="share-fill" style="width:34%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="product"><div class="prod-cell"><span class="rank-badge">۱۰</span>کوکی - وگن کوکی</div></td>
+          <td class="num">۶۱۳</td>
+          <td class="amount">۱.۴۲۹.۱۱۵.۶۶۱</td>
+          <td><div class="share-wrap"><span>٪۵.۲</span><span class="share-track"><span class="share-fill" style="width:32%"></span></span></div></td>
+        </tr>
+        <tr>
+          <td class="product"><div class="prod-cell"><span class="rank-badge">۱۱</span>کوکی - هویج و پنیر</div></td>
+          <td class="num">۱۰</td>
+          <td class="amount">۱۱.۴۸۱.۷۹۹</td>
+          <td><div class="share-wrap"><span>٪۰.۰۴</span><span class="share-track"><span class="share-fill" style="width:2%"></span></span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>گزارش فروش تعدادی و مبلغی دسته کوکی و بار</span>
+    <span>از ابتدای تیر تا ۲۷ شهریور</span>
+  </div>
+
+</div>
+
+</body>
+</html>

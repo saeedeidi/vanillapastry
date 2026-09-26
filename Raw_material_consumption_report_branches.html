@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>گزارش انحراف مصرف مواد اولیه — شعب و آشپزخانه — شهریور ۱۴۰۵</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crimson:#A50021;
+    --crimson-deep:#7A0018;
+    --navy:#1B2A4A;
+    --navy-light:#2E4067;
+    --cream:#F3EBDA;
+    --cream-deep:#E9DDC3;
+    --ink:#221C1A;
+    --paper:#FBF7EF;
+    --green:#CFE8CE;
+    --yellow:#FDEBA8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:'Vazirmatn', sans-serif;background:var(--paper);color:var(--ink);line-height:1.8;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px 90px;}
+
+  /* Masthead */
+  .masthead{background:var(--crimson);color:var(--cream);padding:46px 24px 40px;position:relative;overflow:hidden;}
+  .masthead::after{content:"";position:absolute;inset-inline-end:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--navy) 0%, transparent 70%);opacity:.35;}
+  .masthead .inner{max-width:1080px;margin:0 auto;position:relative;z-index:1;}
+  .eyebrow-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(243,235,218,.3);
+    padding-bottom:16px;margin-bottom:28px;font-size:14px;color:rgba(243,235,218,.8);flex-wrap:wrap;gap:8px;}
+  .masthead h1{font-size:clamp(24px,4vw,34px);font-weight:800;margin:0 0 10px;letter-spacing:-.5px;max-width:700px;}
+  .masthead .sub{font-size:15.5px;color:rgba(243,235,218,.85);max-width:660px;}
+
+  .stat-strip{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px;}
+  .stat-card{background:rgba(255,255,255,.08);border:1px solid rgba(243,235,218,.25);border-radius:6px;padding:16px 18px;}
+  .stat-card .k{font-size:12.5px;color:rgba(243,235,218,.7);margin-bottom:6px;}
+  .stat-card .v{font-size:22px;font-weight:800;color:#fff;}
+  .stat-card .v small{font-size:13px;font-weight:500;color:rgba(243,235,218,.75);}
+
+  /* Sections */
+  .section{margin-top:52px;}
+  .section-head{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+  .section-head .bar{width:6px;height:28px;background:var(--crimson);border-radius:2px;flex:none;}
+  .section-head h2{font-size:22px;font-weight:700;color:var(--navy);margin:0;}
+  .section-note{color:#6b6058;font-size:15px;max-width:760px;margin:0 0 24px;}
+  .lead{font-size:15.5px;color:#3a332f;max-width:800px;}
+
+  /* Legend for color rule */
+  .legend-box{
+    background:var(--paper);border:1px solid var(--cream-deep);border-radius:6px;
+    padding:18px 20px;margin-bottom:26px;
+  }
+  .legend-box .ltitle{font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:12px;}
+  .legend-row{display:flex;flex-wrap:wrap;gap:22px;align-items:center;}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:13.5px;color:#4a4239;}
+  .legend-sw{width:20px;height:20px;border-radius:4px;flex:none;}
+  .legend-gradient{
+    width:130px;height:20px;border-radius:4px;flex:none;
+    background:linear-gradient(to left, rgb(255,214,163), rgb(165,0,33));
+  }
+
+  /* Heatmap table */
+  .table-scroll{overflow-x:auto;border-radius:6px;border:1px solid var(--cream-deep);}
+  table.heatmap{width:100%;border-collapse:collapse;font-size:13.5px;min-width:760px;}
+  table.heatmap thead th{
+    background:var(--navy);color:var(--cream);font-weight:600;text-align:center;
+    padding:12px 10px;font-size:13px;white-space:nowrap;
+  }
+  table.heatmap thead th:first-child{text-align:start;padding-inline-start:16px;}
+  table.heatmap tbody td.mat-name{
+    background:var(--cream);color:var(--ink);font-weight:600;
+    padding:10px 16px;white-space:nowrap;border-bottom:1px solid var(--cream-deep);
+    position:sticky;right:0;
+  }
+  table.heatmap tbody td.hm-cell{
+    text-align:center;padding:10px 8px;font-weight:700;
+    border-bottom:1px solid rgba(255,255,255,.6);
+    border-inline-start:1px solid rgba(255,255,255,.6);
+    white-space:nowrap;
+  }
+  .cat-badge{
+    display:inline-block;margin-inline-start:8px;font-size:10.5px;font-weight:600;
+    padding:2px 8px;border-radius:10px;vertical-align:middle;
+  }
+  .cat-badge.branch{background:var(--navy);color:#fff;}
+  .cat-badge.kitchen{background:var(--crimson);color:#fff;}
+
+  /* Narrative callouts */
+  .callout{
+    background:var(--cream);border-inline-start:3px solid var(--crimson);
+    padding:16px 20px;border-radius:0 6px 6px 0;font-size:14.5px;color:#453e38;margin-bottom:18px;
+  }
+  .callout b{color:var(--navy);}
+  .callout.warn{border-inline-start-color:var(--navy);}
+
+  .stat-pair-inline{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px;}
+  .mini-stat{background:var(--navy);color:var(--cream);border-radius:6px;padding:16px 18px;}
+  .mini-stat .k{font-size:12.5px;color:rgba(243,235,218,.7);margin-bottom:6px;}
+  .mini-stat .v{font-size:24px;font-weight:800;color:#fff;}
+
+  .cause-list{list-style:none;margin:0;padding:0;font-size:14.5px;color:#3a332f;}
+  .cause-list li{
+    position:relative;padding-inline-start:20px;margin-bottom:12px;
+    background:var(--paper);
+  }
+  .cause-list li::before{
+    content:"";position:absolute;right:0;top:8px;width:7px;height:7px;
+    background:var(--crimson);border-radius:1px;
+  }
+
+  .footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--cream-deep);font-size:13px;color:#8a8078;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:640px){
+    .stat-strip,.stat-pair-inline{grid-template-columns:1fr;}
+    table.heatmap{font-size:12px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="inner">
+    <div class="eyebrow-row">
+      <span>گزارش انحراف مصرف مواد اولیه</span>
+      <span>دوره ارزیابی: شهریور ۱۴۰۵</span>
+    </div>
+    <h1>انحراف مصرف مواد اولیه در شعب و آشپزخانه</h1>
+    <p class="sub">مقایسه انحراف مصرف مواد اولیه نسبت به مقدار استاندارد، به تفکیک شعبه و ماده اولیه، برای شناسایی نقاط پرریسک در ثبت و مصرف.</p>
+
+    <div class="stat-strip">
+      <div class="stat-card">
+        <div class="k">سهم موارد با انحراف کمتر از ۱۰٪ در شعب</div>
+        <div class="v">٪۴۹</div>
+      </div>
+      <div class="stat-card">
+        <div class="k">سهم موارد با انحراف کمتر از ۱۰٪ در آشپزخانه‌ها</div>
+        <div class="v">٪۳۸</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="section" style="margin-top:40px;">
+    <div class="section-head"><div class="bar"></div><h2>نقشه حرارتی انحراف مصرف</h2></div>
+    <p class="section-note">در جدول زیر، میزان انحراف مصرف مواد اولیه بر اساس محدوده‌های تعیین‌شده به تفکیک شعبه نمایش داده شده است.</p>
+
+    <div class="legend-box">
+      <div class="ltitle">راهنمای رنگ</div>
+      <div class="legend-row">
+        <div class="legend-item"><span class="legend-sw" style="background:var(--green);"></span>در محدوده ۵٪± — بدون انحراف قابل توجه</div>
+        <div class="legend-item"><span class="legend-sw" style="background:var(--yellow);"></span>بین ۵٪ تا ۱۰٪ — انحراف قابل بررسی</div>
+        <div class="legend-item"><span class="legend-gradient"></span>بیش از ۱۰٪ — شدت نارنجی متناسب با میزان انحراف بالاتر</div>
+      </div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="heatmap">
+        <thead>
+          <tr>
+            <th>ماده اولیه</th>
+            <th>سنایی</th>
+            <th>پاسداران</th>
+            <th>جردن</th>
+            <th>فرشته</th>
+            <th>اقدسیه</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr>
+          <td class="mat-name">قهوه برزیل<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:rgb(247,195,152);color:#3a1400;">۲۲٪-</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۴٪-</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۰٪</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۶٪-</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۵٪-</td>
+        </tr>
+        <tr>
+          <td class="mat-name">قهوه کلمبیا<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۸٪</td><td class="hm-cell" style="background:rgb(254,211,161);color:#3a1400;">۱۲٪-</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۸٪</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۹٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۲٪</td>
+        </tr>
+        <tr>
+          <td class="mat-name">شیر<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۸٪</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۸٪-</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۳٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۰٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۱٪</td>
+        </tr>
+        <tr>
+          <td class="mat-name">بستنی وانیلی<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۱٪</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۹٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۱٪</td><td class="hm-cell" style="background:rgb(248,198,154);color:#3a1400;">۲۰٪</td><td class="hm-cell" style="background:rgb(238,174,139);color:#3a1400;">۳۶٪</td>
+        </tr>
+        <tr>
+          <td class="mat-name">پرتقال<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۴٪</td><td class="hm-cell" style="background:rgb(246,192,150);color:#3a1400;">۲۴٪-</td><td class="hm-cell" style="background:rgb(250,203,156);color:#3a1400;">۱۷٪</td><td class="hm-cell" style="background:rgb(254,212,162);color:#3a1400;">۱۱٪</td><td class="hm-cell" style="background:rgb(238,174,139);color:#3a1400;">۳۶٪</td>
+        </tr>
+        <tr>
+          <td class="mat-name">ماچا<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:rgb(252,206,158);color:#3a1400;">۱۵٪-</td><td class="hm-cell" style="background:rgb(243,185,145);color:#3a1400;">۲۹٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۱٪-</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۸٪</td><td class="hm-cell" style="background:rgb(209,104,96);color:#3a1400;">۸۱٪-</td>
+        </tr>
+        <tr>
+          <td class="mat-name">لیموترش<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:rgb(248,197,153);color:#3a1400;">۲۱٪</td><td class="hm-cell" style="background:rgb(245,191,149);color:#3a1400;">۲۵٪-</td><td class="hm-cell" style="background:rgb(254,212,162);color:#3a1400;">۱۱٪</td><td class="hm-cell" style="background:rgb(254,211,161);color:#3a1400;">۱۲٪</td><td class="hm-cell" style="background:rgb(247,195,152);color:#3a1400;">۲۲٪</td>
+        </tr>
+        <tr>
+          <td class="mat-name">نوتلا<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:rgb(165,0,33);color:#ffffff;">۲۷۴٪-</td><td class="hm-cell" style="background:rgb(240,178,141);color:#3a1400;">۳۳٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۳٪</td><td class="hm-cell" style="background:rgb(249,200,155);color:#3a1400;">۱۹٪</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۷٪-</td>
+        </tr>
+        <tr>
+          <td class="mat-name">هندوانه<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:rgb(232,160,130);color:#3a1400;">۴۵٪</td><td class="hm-cell" style="background:rgb(235,167,135);color:#3a1400;">۴۰٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۱٪-</td><td class="hm-cell" style="background:rgb(254,211,161);color:#3a1400;">۱۲٪-</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۹٪</td>
+        </tr>
+        <tr>
+          <td class="mat-name">انبه منجمد<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۵٪-</td><td class="hm-cell" style="background:rgb(254,211,161);color:#3a1400;">۱۲٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۵٪-</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۵٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۵٪-</td>
+        </tr>
+        <tr>
+          <td class="mat-name">موز<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۳٪-</td><td class="hm-cell" style="background:rgb(247,194,151);color:#3a1400;">۲۳٪-</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۶٪-</td><td class="hm-cell" style="background:rgb(252,208,159);color:#3a1400;">۱۴٪-</td><td class="hm-cell" style="background:rgb(236,169,136);color:#3a1400;">۳۹٪-</td>
+        </tr>
+        <tr>
+          <td class="mat-name">سیروپ کارامل<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:rgb(247,194,151);color:#3a1400;">۲۳٪-</td><td class="hm-cell" style="background:rgb(251,205,157);color:#3a1400;">۱۶٪-</td><td class="hm-cell" style="background:rgb(249,200,155);color:#3a1400;">۱۹٪-</td><td class="hm-cell" style="background:rgb(254,212,162);color:#3a1400;">۱۱٪-</td><td class="hm-cell" style="background:rgb(248,197,153);color:#3a1400;">۲۱٪-</td>
+        </tr>
+        <tr>
+          <td class="mat-name">شیر نارگیل<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۱۰٪</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۱۰٪-</td><td class="hm-cell" style="background:rgb(249,200,155);color:#3a1400;">۱۹٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۰٪</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۸٪</td>
+        </tr>
+        <tr>
+          <td class="mat-name">پودر وی<span class="cat-badge branch">شعبه</span></td>
+          <td class="hm-cell" style="background:rgb(243,185,145);color:#3a1400;">۲۹٪</td><td class="hm-cell" style="background:rgb(250,203,156);color:#3a1400;">۱۷٪</td><td class="hm-cell" style="background:rgb(252,208,159);color:#3a1400;">۱۴٪</td><td class="hm-cell" style="background:rgb(239,175,139);color:#3a1400;">۳۵٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۵٪</td>
+        </tr>
+        <tr>
+          <td class="mat-name">تخم مرغ<span class="cat-badge kitchen">آشپزخانه</span></td>
+          <td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۵٪</td><td class="hm-cell" style="background:rgb(252,208,159);color:#3a1400;">۱۴٪</td><td class="hm-cell" style="background:rgb(253,209,160);color:#3a1400;">۱۳٪</td><td class="hm-cell" style="background:rgb(254,212,162);color:#3a1400;">۱۱٪</td><td class="hm-cell" style="background:rgb(254,212,162);color:#3a1400;">۱۱٪</td>
+        </tr>
+        <tr>
+          <td class="mat-name">بیکن<span class="cat-badge kitchen">آشپزخانه</span></td>
+          <td class="hm-cell" style="background:rgb(225,143,120);color:#3a1400;">۵۶٪</td><td class="hm-cell" style="background:rgb(229,152,125);color:#3a1400;">۵۰٪</td><td class="hm-cell" style="background:rgb(242,183,144);color:#3a1400;">۳۰٪</td><td class="hm-cell" style="background:rgb(239,175,139);color:#3a1400;">۳۵٪</td><td class="hm-cell" style="background:rgb(237,171,137);color:#3a1400;">۳۸٪</td>
+        </tr>
+        <tr>
+          <td class="mat-name">پنیر ورقه‌ای گودا<span class="cat-badge kitchen">آشپزخانه</span></td>
+          <td class="hm-cell" style="background:rgb(252,208,159);color:#3a1400;">۱۴٪-</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۱٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۰٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۵٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۵٪-</td>
+        </tr>
+        <tr>
+          <td class="mat-name">آووکادو درجه ۱<span class="cat-badge kitchen">آشپزخانه</span></td>
+          <td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۲٪-</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۲٪-</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۶٪</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۷٪</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۸٪</td>
+        </tr>
+        <tr>
+          <td class="mat-name">نوتلا<span class="cat-badge kitchen">آشپزخانه</span></td>
+          <td class="hm-cell" style="background:rgb(244,188,147);color:#3a1400;">۲۷٪</td><td class="hm-cell" style="background:rgb(239,177,140);color:#3a1400;">۳۴٪-</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۴٪-</td><td class="hm-cell" style="background:rgb(250,203,156);color:#3a1400;">۱۷٪-</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۳٪-</td>
+        </tr>
+        <tr>
+          <td class="mat-name">موز<span class="cat-badge kitchen">آشپزخانه</span></td>
+          <td class="hm-cell" style="background:rgb(253,209,160);color:#3a1400;">۱۳٪</td><td class="hm-cell" style="background:rgb(254,212,162);color:#3a1400;">۱۱٪</td><td class="hm-cell" style="background:rgb(252,206,158);color:#3a1400;">۱۵٪-</td><td class="hm-cell" style="background:rgb(252,206,158);color:#3a1400;">۱۵٪</td><td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۵٪</td>
+        </tr>
+        <tr>
+          <td class="mat-name">توت فرنگی<span class="cat-badge kitchen">آشپزخانه</span></td>
+          <td class="hm-cell" style="background:#CFE8CE;color:#1E4620;">۲٪</td><td class="hm-cell" style="background:#FDEBA8;color:#5C4200;">۶٪</td><td class="hm-cell" style="background:rgb(247,194,151);color:#3a1400;">۲۳٪-</td><td class="hm-cell" style="background:rgb(239,175,139);color:#3a1400;">۳۵٪</td><td class="hm-cell" style="background:rgb(247,194,151);color:#3a1400;">۲۳٪-</td>
+        </tr>
+        <tr>
+          <td class="mat-name">کنسرو گوجه<span class="cat-badge kitchen">آشپزخانه</span></td>
+          <td class="hm-cell" style="background:rgb(225,143,120);color:#3a1400;">۵۶٪-</td><td class="hm-cell" style="background:rgb(227,147,122);color:#3a1400;">۵۳٪-</td><td class="hm-cell" style="background:rgb(212,112,101);color:#3a1400;">۷۶٪-</td><td class="hm-cell" style="background:rgb(206,98,92);color:#3a1400;">۸۵٪-</td><td class="hm-cell" style="background:rgb(198,78,80);color:#ffffff;">۹۸٪-</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="bar"></div><h2>جمع‌بندی نتایج</h2></div>
+    <div class="stat-pair-inline">
+      <div class="mini-stat">
+        <div class="k">انحراف کمتر از ۱۰٪ در شعب</div>
+        <div class="v">٪۴۹ از موارد ارزیابی‌شده</div>
+      </div>
+      <div class="mini-stat">
+        <div class="k">انحراف کمتر از ۱۰٪ در آشپزخانه‌ها</div>
+        <div class="v">٪۳۸ از موارد ارزیابی‌شده</div>
+      </div>
+    </div>
+    <p class="lead">بررسی نتایج نشان می‌دهد حدود ۴۹ درصد از موارد ارزیابی‌شده در شعب دارای انحراف کمتر از ۱۰ درصد بوده‌اند. این میزان در آشپزخانه‌ها حدود ۳۸ درصد است که نشان‌دهنده وجود انحراف قابل توجه در بخشی از موارد بررسی‌شده، به‌ویژه در خطوط آشپزخانه، است.</p>
+  </div>
+
+  <div class="footer">
+    <span>گزارش انحراف مصرف مواد اولیه — شعب و آشپزخانه</span>
+    <span>دوره ارزیابی: شهریور ۱۴۰۵</span>
+  </div>
+
+</div>
+
+</body>
+</html>

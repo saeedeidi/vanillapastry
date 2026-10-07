@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>چارچوب استاندارد کنترل انحراف مصرف — وانیلا</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crimson:#A50021; --crimson-deep:#7A0018;
+    --navy:#1B2A4A; --navy-light:#2E4067;
+    --cream:#F3EBDA; --cream-deep:#E9DDC3;
+    --ink:#221C1A; --paper:#FBF7EF;
+    --green:#CFE8CE; --yellow:#FDEBA8; --orange:#F6C089; --red:#E8A7A7;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;max-width:100%;overflow-x:hidden;}
+  body{font-family:'Vazirmatn', sans-serif;background:var(--paper);color:var(--ink);line-height:1.85;}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px 90px;}
+
+  .masthead{background:var(--crimson);color:var(--cream);padding:50px 24px 42px;position:relative;overflow:hidden;}
+  .masthead::after{content:"";position:absolute;inset-inline-end:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--navy) 0%, transparent 70%);opacity:.35;}
+  .masthead .inner{max-width:980px;margin:0 auto;position:relative;z-index:1;}
+  .eyebrow-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(243,235,218,.3);
+    padding-bottom:16px;margin-bottom:26px;font-size:13.5px;color:rgba(243,235,218,.8);flex-wrap:wrap;gap:8px;}
+  .masthead h1{font-size:clamp(25px,4vw,36px);font-weight:800;margin:0 0 12px;letter-spacing:-.5px;max-width:720px;}
+  .masthead .sub{font-size:15px;color:rgba(243,235,218,.88);max-width:680px;}
+  .masthead .basis{margin-top:22px;padding-top:18px;border-top:1px solid rgba(243,235,218,.25);font-size:12.5px;color:rgba(243,235,218,.75);}
+
+  .section{margin-top:52px;}
+  .section-num{display:inline-block;font-size:11.5px;font-weight:700;color:var(--crimson-deep);background:var(--cream);
+    padding:3px 10px;border-radius:10px;margin-bottom:10px;}
+  .section-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+  .section-head .bar{width:6px;height:28px;background:var(--crimson);border-radius:2px;flex:none;}
+  .section-head h2{font-size:21px;font-weight:700;color:var(--navy);margin:0;}
+  .section-note{color:#6b6058;font-size:14.5px;max-width:760px;margin:0 0 20px;}
+  .lead{font-size:15px;color:#3a332f;max-width:780px;margin-bottom:16px;}
+
+  h3.sub-head{font-size:15.5px;font-weight:700;color:var(--navy);margin:26px 0 8px;}
+
+  .stat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:10px;}
+  .stat-card{background:var(--cream);border-top:3px solid var(--crimson);border-radius:4px;padding:16px 16px;}
+  .stat-card .v{font-size:22px;font-weight:800;color:var(--navy);margin-bottom:4px;}
+  .stat-card .k{font-size:12.5px;color:#6b6058;}
+
+  .callout{background:var(--cream);border-inline-start:3px solid var(--crimson);padding:16px 20px;border-radius:0 6px 6px 0;
+    font-size:14.5px;color:#453e38;margin-bottom:16px;}
+  .callout b{color:var(--navy);display:block;margin-bottom:5px;}
+  .callout.navy{border-inline-start-color:var(--navy);}
+  .callout.quote{background:var(--navy);color:var(--cream);border-inline-start:3px solid var(--crimson);font-size:17px;font-weight:600;line-height:1.9;}
+  .callout.quote b{color:#fff;}
+
+  table.std{width:100%;border-collapse:collapse;font-size:13.5px;}
+  table.std thead th{background:var(--navy);color:var(--cream);font-weight:600;text-align:start;padding:11px 12px;font-size:12px;}
+  table.std thead th:first-child{border-start-start-radius:6px;}
+  table.std thead th:last-child{border-start-end-radius:6px;}
+  table.std tbody td{padding:10px 12px;border-bottom:1px solid var(--cream-deep);vertical-align:top;}
+  table.std tbody tr:nth-child(odd){background:var(--cream);}
+  table.std td.num{color:var(--navy);font-weight:700;white-space:nowrap;text-align:center;}
+  table.std td.neg{color:var(--crimson-deep);font-weight:700;white-space:nowrap;text-align:center;}
+  table.std td.pos{color:#1E6E3C;font-weight:700;white-space:nowrap;text-align:center;}
+  .table-scroll{overflow-x:auto;border-radius:6px;border:1px solid var(--cream-deep);-webkit-overflow-scrolling:touch;margin-bottom:16px;}
+  table.std.scrollable{min-width:720px;}
+
+  .chip-row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px;}
+  .status-chip{font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:20px;color:var(--ink);}
+
+  .step-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
+  .step-row{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:flex-start;}
+  .step-row .num{width:34px;height:34px;border-radius:50%;background:var(--crimson);color:#fff;font-weight:800;font-size:14px;
+    display:flex;align-items:center;justify-content:center;flex:none;}
+  .step-row .txt{font-size:14.5px;color:#3a332f;padding-top:5px;}
+  .step-row .txt b{color:var(--navy);}
+
+  .threshold-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:18px;}
+  .threshold-card{background:var(--navy);color:var(--cream);border-radius:6px;padding:16px 18px;text-align:center;}
+  .threshold-card .unit{font-size:13px;color:rgba(243,235,218,.75);margin-bottom:6px;}
+  .threshold-card .val{font-size:19px;font-weight:800;color:#fff;}
+
+  .formula-box{background:var(--navy);color:#fff;border-radius:6px;padding:16px 20px;font-family:'Courier New',monospace;
+    font-size:13px;margin-bottom:14px;line-height:1.9;overflow-x:auto;direction:ltr;text-align:left;}
+  .formula-label{font-size:12.5px;color:var(--crimson-deep);font-weight:700;margin-bottom:6px;direction:rtl;text-align:right;}
+
+  .class-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:18px;}
+  .class-card{border-radius:6px;padding:16px 18px;background:var(--cream);border-top:4px solid var(--crimson);}
+  .class-card .letter{font-size:20px;font-weight:900;color:var(--navy);}
+  .class-card .pct{font-size:14px;font-weight:700;color:var(--crimson-deep);margin:4px 0 8px;}
+  .class-card .desc{font-size:13px;color:#4a4239;}
+
+  .layer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px;}
+  .layer-card{background:var(--paper);border:1px solid var(--cream-deep);border-radius:6px;padding:16px 18px;}
+  .layer-card .ltitle{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+  .layer-card .ldesc{font-size:13px;color:#4a4239;}
+
+  .phase-row{display:grid;grid-template-columns:120px 1fr;gap:16px;background:var(--cream);border-radius:6px;padding:14px 16px;
+    align-items:center;margin-bottom:10px;}
+  .phase-row .ph-tag{font-size:12.5px;font-weight:800;color:#fff;background:var(--crimson);padding:8px 10px;border-radius:4px;text-align:center;}
+  .phase-row .ph-title{font-weight:700;color:var(--navy);font-size:14px;margin-bottom:3px;}
+  .phase-row .ph-desc{font-size:13px;color:#4a4239;}
+
+  .example-list{list-style:none;margin:0 0 16px;padding:0;font-size:14px;color:#3a332f;}
+  .example-list li{position:relative;padding-inline-start:18px;margin-bottom:9px;}
+  .example-list li::before{content:"";position:absolute;right:0;top:9px;width:6px;height:6px;background:var(--crimson);border-radius:1px;}
+
+  .links-box{font-size:13px;color:#4a4239;}
+  .links-box a{color:var(--crimson-deep);text-decoration:none;word-break:break-all;}
+  .links-box a:hover{text-decoration:underline;}
+
+  .footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--cream-deep);font-size:12.5px;color:#8a8078;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:640px){
+    table.std{font-size:12px;}
+    table.std thead th, table.std tbody td{padding:8px 8px;}
+    .formula-box{font-size:11.5px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="inner">
+    <div class="eyebrow-row">
+      <span>VANILLA • Consumption Control Framework</span>
+      <span>پیشنهاد چارچوب استاندارد</span>
+    </div>
+    <h1>چارچوب استاندارد برای کنترل انحراف مصرف</h1>
+    <p class="sub">مدل پیشنهادی برای شعب، کارگاه و آشپزخانه؛ با تفکیک خانواده کالا، کنترل اقلام کم‌مصرف، Value Deviation و اولویت‌بندی ABC.</p>
+    <div class="basis">مبنای این گزارش: فایل «مواد اولیه.xlsx» + بررسی روش‌های Theoretical vs Actual و ABC Analysis &nbsp;•&nbsp; تاریخ تهیه: ۱۴۰۵/۰۷/۱۴</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- 01 EXECUTIVE SUMMARY -->
+  <div class="section" style="margin-top:40px;">
+    <div class="section-num">EXECUTIVE SUMMARY / ۰۱</div>
+    <div class="section-head"><div class="bar"></div><h2>جمع‌بندی مدیریتی</h2></div>
+
+    <div class="stat-strip">
+      <div class="stat-card"><div class="v">۴</div><div class="k">واحدهای موجود — کیلوگرم، لیتر، عدد، بسته</div></div>
+      <div class="stat-card"><div class="v">٪۱۵+</div><div class="k">سقف پیشنهادی تلورانس — فقط برای میوه و سبزیجات تازه</div></div>
+    </div>
+
+    <h3 class="sub-head">نتیجه اصلی</h3>
+    <p class="lead">یک درصد ثابت برای همه مواد اولیه مناسب نیست. رفتار میوه تازه، تخم‌مرغ، آرد، ادویه و روغن از نظر Portioning، Yield، فساد و دقت اندازه‌گیری متفاوت است؛ بنابراین تلورانس باید در سطح «خانواده کنترلی» تعریف شود.</p>
+
+    <div class="callout">
+      <b>نکته مهم درباره مواد کم‌مصرف</b>
+      یک اختلاف ۲۰ گرم می‌تواند برای یک ماده با مصرف نظری ۱۰۰ گرم، انحراف ٪۲۰ بسازد؛ در حالی که خود اختلاف از نظر عملی کوچک است. بنابراین برای این اقلام، ابتدا «مقدار اختلاف و ارزش اختلاف» و بعد درصد انحراف بررسی شود.
+    </div>
+
+    <h3 class="sub-head">مدل پیشنهادی ۱: Tolerance Family</h3>
+    <p class="lead">هر خانواده یک بازه مثبت/منفی متفاوت داشته باشد. سمت مثبت بزرگ‌تر از سمت منفی تعریف شود؛ چون Under-consumption هم لزوماً مطلوب نیست و می‌تواند ناشی از ثبت ناقص، BOM اشتباه یا انتقال بین خطوط باشد.</p>
+
+    <h3 class="sub-head">مدل پیشنهادی ۲: Value Deviation</h3>
+    <p class="lead">در کنار Deviation Qty، اختلاف مبلغی محاسبه شود تا سیستم نشان دهد کدام ماده واقعاً بیشترین Leakage مالی ایجاد کرده است؛ نه صرفاً کدام ماده درصد انحراف بزرگ‌تری دارد.</p>
+
+    <div class="callout navy">
+      <b>پیشنهاد نهایی</b>
+      Family برای تعیین تلورانس، Value Deviation برای سنجش اثر مالی، و ABC برای تعیین شدت کنترل و اولویت پیگیری استفاده شود. این سه، جای هم را نمی‌گیرند بلکه مکمل‌اند.
+    </div>
+
+    <div class="callout">
+      <b>آنچه این گزارش ادعا نمی‌کند</b>
+      اعداد تلورانس پیشنهادی در این گزارش «استاندارد رسمی صنعت» نیستند؛ آن‌ها Starting Control Limits برای وانیلا هستند و باید پس از ۳ تا ۶ ماه داده تمیز BOM vs Actual با Yield و ثبت ضایعات استاندارد، بازتنظیم شوند.
+    </div>
+  </div>
+
+  <!-- 02 DATA AUDIT -->
+  <div class="section">
+    <div class="section-num">DATA AUDIT / ۰۲</div>
+    <div class="section-head"><div class="bar"></div><h2>بررسی فایل و ساختار فعلی اقلام</h2></div>
+    <p class="section-note">بررسی ساختار فعلی اقلام نشان می‌دهد ۴ واحد اندازه‌گیری متفاوت در فایل استفاده شده که سهم هرکدام از نظر کنترل اختلاف وزنی/حجمی یکسان نیست.</p>
+
+    <h3 class="sub-head">واحدهای ثبت‌شده بین اقلام یکتا</h3>
+    <div class="table-scroll">
+    <table class="std scrollable">
+      <thead><tr><th>واحد</th><th>تعداد کد یکتا</th><th>سهم</th><th>نکته کنترلی</th></tr></thead>
+      <tbody>
+        <tr><td class="num">کیلوگرم</td><td class="num">۲۳۵</td><td class="num">٪۷۹.۹</td><td>بهترین واحد برای محاسبه اختلاف وزنی؛ در مواد کم‌مصرف باید حداقل مبنا تعریف شود.</td></tr>
+        <tr><td class="num">لیتر</td><td class="num">۴۶</td><td class="num">٪۱۵.۶</td><td>مشابه kg، ولی باید دقت Dispensing نیز کنترل شود.</td></tr>
+        <tr><td class="num">عدد</td><td class="num">۱۱</td><td class="num">٪۳.۷</td><td>برای تخم‌مرغ و اقلام شمارشی درصد می‌تواند از اختلاف کوچک بزرگ‌نمایی کند.</td></tr>
+        <tr><td class="num">بسته</td><td class="num">۲</td><td class="num">٪۰.۷</td><td>بهتر است در صورت امکان به واحد مصرفی تبدیل شود.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 class="sub-head">خانواده‌های ثبت‌شده در فایل — پیش از بازطراحی</h3>
+    <div class="table-scroll">
+    <table class="std scrollable">
+      <thead><tr><th>خانواده</th><th>تعداد</th></tr></thead>
+      <tbody>
+        <tr><td>میوه و سبزیجات</td><td class="num">۵۴</td></tr>
+        <tr><td>اسانس و طعم دهنده</td><td class="num">۳۹</td></tr>
+        <tr><td>آرد و پودر</td><td class="num">۳۶</td></tr>
+        <tr><td>لبنیات</td><td class="num">۲۹</td></tr>
+        <tr><td>خشکبار</td><td class="num">۲۶</td></tr>
+        <tr><td>ادویه</td><td class="num">۲۵</td></tr>
+        <tr><td>افزودنی‌ها</td><td class="num">۲۲</td></tr>
+        <tr><td>دمنوش چای و قهوه</td><td class="num">۲۱</td></tr>
+        <tr><td>شکلات و بیسکویت</td><td class="num">۱۲</td></tr>
+        <tr><td>شیرین کننده</td><td class="num">۸</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 class="sub-head">مشاهدات پاکسازی</h3>
+    <p class="lead" style="margin-bottom:8px;">۳ خانواده نام‌گذاری مشابه دارند و بهتر است استاندارد شوند:</p>
+    <ul class="example-list">
+      <li>دمنوش چای و قهوه / دمنوش چای قهوه</li>
+      <li>شکلات و بیسکویت / شکلات و بیسکوئیت</li>
+      <li>تزیینی / تزئینی</li>
+    </ul>
+    <div class="callout">این ناهماهنگی در Power BI، Pivot و KPI باعث شکستن یک خانواده به چند گروه می‌شود.</div>
+
+    <h3 class="sub-head">چند نکته از بررسی محتوای نام کالا</h3>
+    <div class="table-scroll">
+    <table class="std scrollable">
+      <thead><tr><th>مثال</th><th>خانواده فعلی</th><th>پیشنهاد کنترلی</th></tr></thead>
+      <tbody>
+        <tr><td>لبنیات - کره پاستوریزه شیرین کاله</td><td>لبنیات</td><td>لبنیات</td></tr>
+        <tr><td>مواد پروتئینی - تخم مرغ</td><td>تخم مرغ و فرآورده‌های تخم مرغ</td><td>تخم مرغ و فرآورده‌های تخم مرغ</td></tr>
+        <tr><td>میوه و سبزیجات - توت فرنگی تازه</td><td>میوه و سبزیجات</td><td>میوه و سبزیجات تازه</td></tr>
+        <tr><td>آرد و پودر - آرد گندم خوزستان</td><td>آرد و پودر</td><td>آرد و پودرهای پایه</td></tr>
+        <tr><td>افزودنی‌ها - روغن نارگیل</td><td>افزودنی‌ها</td><td>چربی، روغن و اسپردها</td></tr>
+        <tr><td>دمنوش چای و قهوه - قهوه برزیل ٪۱۰۰ عربیکا</td><td>دمنوش چای و قهوه</td><td>چای، قهوه و دمنوش</td></tr>
+        <tr><td>ادویه - غلاف وانیل</td><td>ادویه</td><td>ادویه و چاشنی خشک</td></tr>
+        <tr><td>شکلات و بیسکویت - شکلات فندقی</td><td>شکلات و بیسکویت</td><td>شکلات و بیسکویت</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- 03 FAMILY TOLERANCE -->
+  <div class="section">
+    <div class="section-num">FAMILY TOLERANCE / ۰۳</div>
+    <div class="section-head"><div class="bar"></div><h2>خانواده‌های پیشنهادی و بازه انحراف</h2></div>
+    <p class="lead">بازه‌ها عمداً نامتقارن طراحی شده‌اند: حد منفی کوچک‌تر و حد مثبت بزرگ‌تر است. منفی شدن مصرف نظری لزوماً مطلوب نیست و می‌تواند نشانه Over-portioning معکوس، ثبت ناقص تولید/فروش، BOM نادرست یا انتقال بین خطوط باشد.</p>
+
+    <div class="table-scroll">
+    <table class="std scrollable">
+      <thead><tr><th>خانواده کنترلی پیشنهادی</th><th>تعداد تقریبی*</th><th>حد منفی</th><th>حد مثبت</th><th>منطق</th></tr></thead>
+      <tbody>
+        <tr><td>میوه و سبزیجات تازه</td><td class="num">۵۴</td><td class="neg">٪۴-</td><td class="pos">٪۱۵+</td><td>نوسان Trim، Yield، افت کیفیت و فساد بالاتر</td></tr>
+        <tr><td>پروتئین</td><td class="num">۴</td><td class="neg">٪۳-</td><td class="pos">٪۱۲+</td><td>Yield پخت/تمیزکاری و Portioning</td></tr>
+        <tr><td>تخم مرغ و فرآورده‌های تخم مرغ</td><td class="num">۳</td><td class="neg">٪۲-</td><td class="pos">٪۵+</td><td>واحد شمارشی؛ شکستگی و خطای ثبت مهم است</td></tr>
+        <tr><td>لبنیات</td><td class="num">۲۸</td><td class="neg">٪۳-</td><td class="pos">٪۹+</td><td>Portioning، نگهداری و ضایعات</td></tr>
+        <tr><td>چربی، روغن و اسپردها</td><td class="num">۱۰</td><td class="neg">٪۲-</td><td class="pos">٪۷+</td><td>Dispensing و Portioning</td></tr>
+        <tr><td>آرد و پودرهای پایه</td><td class="num">۳۶</td><td class="neg">٪۲-</td><td class="pos">٪۵+</td><td>رفتار نسبتاً پایدار و قابل اندازه‌گیری</td></tr>
+        <tr><td>شیرین‌کننده‌ها</td><td class="num">۸</td><td class="neg">٪۲-</td><td class="pos">٪۵+</td><td>رفتار پایدار و قابل کنترل</td></tr>
+        <tr><td>خشکبار، مغز و دانه‌ها</td><td class="num">۲۶</td><td class="neg">٪۳-</td><td class="pos">٪۸+</td><td>ارزش مالی بالاتر و حساس به Portion</td></tr>
+        <tr><td>شکلات و بیسکویت</td><td class="num">۱۳</td><td class="neg">٪۳-</td><td class="pos">٪۸+</td><td>ارزش و حساسیت Portioning</td></tr>
+        <tr><td>ادویه و چاشنی خشک</td><td class="num">۲۵</td><td class="neg">٪۴-</td><td class="pos">٪۹+</td><td>مصرف کم؛ درصد خام می‌تواند noisy باشد</td></tr>
+        <tr><td>طعم‌دهنده، سس و سیروپ</td><td class="num">۳۹</td><td class="neg">٪۳-</td><td class="pos">٪۱۰+</td><td>Dispensing و Portioning</td></tr>
+        <tr><td>چای، قهوه و دمنوش</td><td class="num">۲۲</td><td class="neg">٪۲-</td><td class="pos">٪۷+</td><td>قابل Portioning ولی برخی اقلام کم‌مصرف‌اند</td></tr>
+        <tr><td>افزودنی و مواد عملکردی</td><td class="num">۱۴</td><td class="neg">٪۴-</td><td class="pos">٪۱۰+</td><td>مصرف پایین / حساسیت بالا به خطای درصدی</td></tr>
+        <tr><td>کمپوت و کنسرو</td><td class="num">۱</td><td class="neg">٪۳-</td><td class="pos">٪۸+</td><td>Yield و پرت بسته/محتویات</td></tr>
+        <tr><td>نوشیدنی سرد</td><td class="num">۳</td><td class="neg">٪۳-</td><td class="pos">٪۸+</td><td>Portioning و ثبت مصرف</td></tr>
+        <tr><td>نان</td><td class="num">۲</td><td class="neg">٪۲-</td><td class="pos">٪۵+</td><td>تعداد/وزن قابل اندازه‌گیری</td></tr>
+        <tr><td>غلات</td><td class="num">۱</td><td class="neg">٪۲-</td><td class="pos">٪۵+</td><td>رفتار پایدار</td></tr>
+        <tr><td>تزئینی و تاپینگ</td><td class="num">۳</td><td class="neg">٪۴-</td><td class="pos">٪۹+</td><td>مصرف موردی و Portioning</td></tr>
+        <tr><td>مصرفی غیرخوراکی</td><td class="num">۲</td><td class="num">—</td><td class="num">—</td><td>در KPI مصرف مواد اولیه غذایی جداگانه مدیریت شود</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="section-note" style="font-size:12.5px;">* تعداد بر اساس یک Mapping اولیه از نام کالاهاست و برای خانواده‌های بازطراحی‌شده ممکن است با بازبینی دقیق نام اقلام تغییر کند.</p>
+
+    <h3 class="sub-head">مقیاس وضعیت برای سطح ماده</h3>
+    <p class="lead">برای KPI بهتر است فقط یک رنگ نداشته باشیم. هر ماده می‌تواند یکی از چهار وضعیت را بگیرد و همراه با مبلغ اختلاف نمایش داده شود.</p>
+    <div class="chip-row">
+      <span class="status-chip" style="background:var(--green);">داخل بازه</span>
+      <span class="status-chip" style="background:var(--yellow);">نزدیک مرز</span>
+      <span class="status-chip" style="background:var(--orange);">خارج از بازه</span>
+      <span class="status-chip" style="background:var(--red);color:#fff;">بحرانی / نیازمند اقدام</span>
+    </div>
+
+    <div class="callout navy">
+      <b>قانون مهم</b>
+      تلورانس خانواده جای BOM یا Yield استاندارد را نمی‌گیرد. اگر یک فرآیند به‌صورت واقعی همیشه ٪۸ Trim دارد، راه حرفه‌ای‌تر ثبت Yield واقعی در استاندارد است تا سپس انحراف عملیاتی اندازه‌گیری شود.
+    </div>
+    <div class="callout">
+      <b>چرا سقف ٪۱۵؟</b>
+      برای جلوگیری از هم‌سطح کردن خانواده‌ها. فقط خانواده‌ای مثل میوه و سبزیجات تازه که نوسان عملیاتی بالاتری دارد، می‌تواند تا این سقف اولیه برسد. ٪۱۵ «حق مصرف اضافه» نیست؛ حدی برای شروع Investigation است.
+    </div>
+  </div>
+
+  <!-- 04 LOW VOLUME -->
+  <div class="section">
+    <div class="section-num">LOW-VOLUME CONTROL / ۰۴</div>
+    <div class="section-head"><div class="bar"></div><h2>راه‌حل اقلام کم‌مصرف: درصد را تنها نگذاریم</h2></div>
+    <p class="section-note">بازه نمونه برای Low-volume Gate در دوره گزارش. این آستانه‌ها Threshold عملیاتی پیشنهادی‌اند، نه قانون صنعتی. عدد نهایی باید از دقت باسکول، واحد ثبت در ERP و حجم واقعی مصرف ماهانه وانیلا تعیین شود.</p>
+
+    <div class="threshold-grid">
+      <div class="threshold-card"><div class="unit">کیلوگرم</div><div class="val">&lt; ۰.۵ kg</div></div>
+      <div class="threshold-card"><div class="unit">لیتر</div><div class="val">&lt; ۰.۵ L</div></div>
+      <div class="threshold-card"><div class="unit">عدد</div><div class="val">&lt; ۱۰</div></div>
+    </div>
+    <p class="lead" style="font-size:13.5px;color:#6b6058;">در این حالت درصد به‌تنهایی معیار اصلی نباشد؛ برای اقلام شمارشی، اول اختلاف تعداد و مبلغ بررسی شود.</p>
+
+    <h3 class="sub-head">منطق پیشنهادی تصمیم‌گیری</h3>
+    <div class="step-grid">
+      <div class="step-row"><div class="num">۱</div><div class="txt"><b>اول مبنا را بسنج.</b> اگر مصرف نظری دوره بسیار کم است، Deviation Qty % را به‌تنهایی مبنا قرار نده.</div></div>
+      <div class="step-row"><div class="num">۲</div><div class="txt"><b>بعد اختلاف واقعی را ببین.</b> مثلاً ۲۰ گرم اختلاف، قبل از آنکه به ٪۲۰ تبدیل شود، به‌عنوان ۲۰ گرم دیده شود.</div></div>
+      <div class="step-row"><div class="num">۳</div><div class="txt"><b>ارزش اختلاف را محاسبه کن.</b> اگر همان ۲۰ گرم مربوط به یک ماده بسیار گران باشد، ممکن است از ۵۰۰ گرم اختلاف یک ماده ارزان مهم‌تر باشد.</div></div>
+      <div class="step-row"><div class="num">۴</div><div class="txt"><b>سپس ABC و Family را اعمال کن.</b> Family شدت قابل قبول نوسان را تعیین می‌کند؛ ABC تعیین می‌کند چقدر سریع و جدی بررسی شود.</div></div>
+    </div>
+
+    <div class="formula-label">پیشنهاد فرمول نهایی برای Flag</div>
+    <div class="formula-box">FLAG = (abs(Deviation%) &gt; Family Limit) AND (Deviation Value &gt; Minimum Value Threshold)<br><br>برای Low-Volume items:<br>PRIORITY = Deviation Value + ABC class</div>
+
+    <p class="lead">نتیجه: ماده کم‌مصرف حذف نمی‌شود؛ فقط معیار تصمیم‌گیری از «درصد خام» به «مقدار + مبلغ + کلاس اهمیت» تغییر می‌کند.</p>
+  </div>
+
+  <!-- 05 DEVIATION VALUE -->
+  <div class="section">
+    <div class="section-num">DEVIATION VALUE / ۰۵</div>
+    <div class="section-head"><div class="bar"></div><h2>شاخص مالی انحراف مصرف — پیشنهاد اصلی</h2></div>
+    <p class="lead">دو شاخص را هم‌زمان نگه داریم:</p>
+
+    <div class="formula-label">Signed Deviation Value %  —  اثر خالص</div>
+    <div class="formula-box">Signed DV% = Σ(Actual Cost − Theoretical Cost) ÷ Σ(Theoretical Cost) × 100</div>
+    <p class="lead" style="font-size:13.5px;">به ما می‌گوید در مجموع، Actual چقدر از Theoretical بالاتر یا پایین‌تر بوده است. برای گزارش مدیریتی بسیار مهم است.</p>
+
+    <div class="formula-label">Absolute Deviation Value %  —  شدت مشکل</div>
+    <div class="formula-box">Absolute DV% = Σ|Actual Cost − Theoretical Cost| ÷ Σ(Theoretical Cost) × 100</div>
+    <p class="lead" style="font-size:13.5px;">جلوگیری می‌کند که انحراف مثبت یک ماده با انحراف منفی ماده دیگر خنثی شود. برای کنترل عملیات و تشخیص پراکندگی بهتر است.</p>
+
+    <h3 class="sub-head">بازه پیشنهادی اولیه برای کل یک شعبه / کارگاه / آشپزخانه</h3>
+    <div class="table-scroll">
+    <table class="std scrollable">
+      <thead><tr><th>شاخص</th><th style="background:#9FCC9E;color:#1E4620;">سبز</th><th style="background:#F7DD86;color:#5C4200;">زرد</th><th style="background:#F0AD6B;color:#5c3310;">نارنجی</th><th style="background:#E27E7E;color:#fff;">قرمز</th></tr></thead>
+      <tbody>
+        <tr><td>DV Signed%</td><td class="num">٪۱- تا ٪۲+</td><td class="num">٪۲+ تا ٪۳+</td><td class="num">٪۳+ تا ٪۵+</td><td class="num">بیش از ٪۵+</td></tr>
+        <tr><td>DV Absolute%</td><td class="num">≤ ٪۳</td><td class="num">٪۳ تا ٪۵</td><td class="num">٪۵ تا ٪۷</td><td class="num">بیش از ٪۷</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout navy">
+      <b>تفسیر منفی</b>
+      DV Signed% کمتر از ٪۱- را هم بی‌اهمیت فرض نکنیم؛ ممکن است نشانه ثبت ناقص مصرف، انتقال اشتباه، فروش/تولید جاافتاده یا BOM بزرگ‌تر از واقعیت باشد.
+    </div>
+
+    <h3 class="sub-head">این اعداد چقدر «استاندارد» هستند؟</h3>
+    <p class="lead">برای Theoretical vs Actual Food Cost در سطح کل رستوران، منابع صنعتی انحراف کمتر از حدود ۲ تا ٪۳ را به‌عنوان وضعیت سالم مطرح می‌کنند و ٪۵ به بالا را نشانه مسئله‌ای می‌دانند که باید بررسی شود. این benchmark مربوط به کل Food Cost / AvT است، نه تلورانس تک‌تک مواد اولیه. بنابراین بازه بالا به‌عنوان Internal Starting Control Limit برای وانیلا پیشنهاد شده است، نه یک استاندارد رسمی جهانی.</p>
+
+    <div class="callout">
+      <b>پیشنهاد اجرایی</b>
+      برای KPI مدیر شعبه/کارگاه/آشپزخانه، DV Signed% معیار اصلی باشد؛ DV Absolute% به‌عنوان «Quality of Control» کنار آن نمایش داده شود.
+    </div>
+  </div>
+
+  <!-- 06 ABC ANALYSIS -->
+  <div class="section">
+    <div class="section-num">ABC ANALYSIS / ۰۶</div>
+    <div class="section-head"><div class="bar"></div><h2>ABC Analysis برای اولویت‌بندی کنترل</h2></div>
+    <p class="lead">ABC جای Family را نمی‌گیرد. Family می‌گوید یک ماده چقدر نوسان طبیعی دارد؛ ABC می‌گوید کنترل آن ماده چقدر باید شدید و پرتکرار باشد.</p>
+
+    <h3 class="sub-head">روش پیشنهادی برای وانیلا</h3>
+    <div class="step-grid">
+      <div class="step-row"><div class="num">۱</div><div class="txt"><b>ارزش مصرف دوره را بساز.</b> پیشنهاد: برای ۱۲ ماه اخیر، Standard Cost × Theoretical Consumption Qty را برای هر ماده حساب کن.</div></div>
+      <div class="step-row"><div class="num">۲</div><div class="txt"><b>از بیشترین به کمترین مرتب کن.</b> سپس سهم هر ماده از کل ارزش مصرف و درصد تجمعی را محاسبه کن.</div></div>
+      <div class="step-row"><div class="num">۳</div><div class="txt"><b>کلاس‌ها را به‌صورت اولیه تنظیم کن.</b> A: تا حدود ۷۰ تا ٪۸۰ ارزش تجمعی؛ B: حدود ۸۰ تا ٪۹۵؛ C: بقیه. مرزها قانون ثابت نیستند و باید با ساختار واقعی سبد وانیلا تنظیم شوند.</div></div>
+    </div>
+
+    <div class="class-grid">
+      <div class="class-card"><div class="letter">A</div><div class="pct">٪۷۰ تا ٪۸۰</div><div class="desc">بخش عمده ارزش مصرف؛ کنترل نزدیک، بازبینی سریع</div></div>
+      <div class="class-card"><div class="letter">B</div><div class="pct">٪۱۵ تا ٪۲۵</div><div class="desc">کنترل استاندارد، بازبینی دوره‌ای</div></div>
+      <div class="class-card"><div class="letter">C</div><div class="pct">٪۵ تا ٪۱۰</div><div class="desc">کنترل ساده‌تر و عمدتاً Exception-based</div></div>
+    </div>
+    <p class="section-note" style="font-size:12.5px;">این بازه‌ها نمونه‌های متداول ABC هستند و آستانه قطعی جهانی ندارند؛ در ABC Analysis، مرزها بسته به هدف و شکل توزیع ارزش مصرف قابل تنظیم‌اند.</p>
+
+    <h3 class="sub-head">ترکیب Deviation Value با ABC</h3>
+    <div class="table-scroll">
+    <table class="std scrollable">
+      <thead><tr><th>کلاس</th><th>انحراف</th><th>اقدام</th><th>دفعات بررسی</th></tr></thead>
+      <tbody>
+        <tr><td class="num">A</td><td>حتی انحراف درصدی کوچک اگر مبلغ آن معنادار باشد</td><td>تحلیل علت، بررسی سند/رسپی/خط تولید، اقدام اصلاحی</td><td class="num">هفتگی یا هر دوره کوتاه</td></tr>
+        <tr><td class="num">B</td><td>عبور از Family Limit یا DV%</td><td>بررسی علت و Follow-up</td><td class="num">ماهانه</td></tr>
+        <tr><td class="num">C</td><td>فقط وقتی Deviation Value یا درصد از حد بالایی عبور کند</td><td>Exception-based</td><td class="num">ماهانه/فصلی</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout navy">
+      <b>یک نتیجه مهم</b>
+      یک انحراف ٪۳ در یک ماده A می‌تواند از یک انحراف ٪۵۰ در یک ماده C مهم‌تر باشد؛ چون اولی اثر مالی بیشتری دارد. به همین دلیل ABC باید بخشی از منطق KPI باشد، نه فقط یک گزارش انبار.
+    </div>
+  </div>
+
+  <!-- 07 OPERATING MODEL -->
+  <div class="section">
+    <div class="section-num">OPERATING MODEL / ۰۷</div>
+    <div class="section-head"><div class="bar"></div><h2>مدل نهایی پیشنهادی برای داشبورد و KPI</h2></div>
+    <p class="lead">هر ماده چهار لایه کنترل داشته باشد:</p>
+
+    <div class="layer-grid">
+      <div class="layer-card"><div class="ltitle">Layer 1 — Data Quality</div><div class="ldesc">کد ماده، واحد، BOM، قیمت استاندارد، Mapping فروش و مصرف، ثبت ضایعات و انتقال بین خطوط.</div></div>
+      <div class="layer-card"><div class="ltitle">Layer 2 — Quantity Variance</div><div class="ldesc">Actual Qty در مقابل BOM/Theoretical Qty و انحراف درصدی با tolerance مخصوص هر خانواده.</div></div>
+      <div class="layer-card"><div class="ltitle">Layer 3 — Financial Variance</div><div class="ldesc">Value Deviation و نسبت آن به کل Theoretical Consumption Cost.</div></div>
+      <div class="layer-card"><div class="ltitle">Layer 4 — Priority</div><div class="ldesc">ABC + شدت انحراف + تکرار در ماه‌های متوالی برای تعیین Action Priority.</div></div>
+    </div>
+
+    <h3 class="sub-head">نمونه Score ساده برای Priority Action</h3>
+    <div class="table-scroll">
+    <table class="std scrollable">
+      <thead><tr><th>مؤلفه</th><th>امتیاز پیشنهادی</th><th>کارکرد</th></tr></thead>
+      <tbody>
+        <tr><td>عبور از Family Limit</td><td class="num">۱</td><td>تشخیص انحراف عملیاتی</td></tr>
+        <tr><td>DV Signed% بالاتر از ٪۳</td><td class="num">۲</td><td>اثر مالی کل</td></tr>
+        <tr><td>DV Absolute% بالاتر از ٪۵</td><td class="num">۲</td><td>پراکندگی و ضعف کنترل</td></tr>
+        <tr><td>ABC class = A</td><td class="num">۲</td><td>اهمیت مالی بیشتر</td></tr>
+        <tr><td>تکرار انحراف در ۲ دوره متوالی</td><td class="num">۲</td><td>مشکل سیستماتیک</td></tr>
+        <tr><td>ابهام Data Quality / انتقال</td><td class="num">۱</td><td>نیاز به اصلاح داده قبل از قضاوت عملکرد</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="chip-row">
+      <span class="status-chip" style="background:var(--red);color:#fff;">Priority ۶+ = اقدام اصلاحی فوری</span>
+      <span class="status-chip" style="background:var(--orange);">Priority ۴–۵ = بررسی و Follow-up</span>
+      <span class="status-chip" style="background:var(--green);">Priority ≤۳ = پایش</span>
+    </div>
+
+    <h3 class="sub-head">Roadmap پیشنهادی</h3>
+    <div class="phase-row"><div class="ph-tag">فاز A</div><div><div class="ph-title">ماه اول</div><div class="ph-desc">پاکسازی Master Data، حذف تکراری‌ها، استاندارد نام خانواده‌ها و واحدها.</div></div></div>
+    <div class="phase-row"><div class="ph-tag">فاز B</div><div><div class="ph-title">ماه دوم</div><div class="ph-desc">محاسبه BOM vs Actual در سطح ماده و خانواده + اضافه کردن Value Deviation.</div></div></div>
+    <div class="phase-row"><div class="ph-tag">فاز C</div><div><div class="ph-title">ماه سوم</div><div class="ph-desc">ساخت ABC بر مبنای ۱۲ ماه اخیر و فعال‌سازی Action Priority.</div></div></div>
+    <div class="phase-row"><div class="ph-tag">فاز D</div><div><div class="ph-title">بعد از ۳ تا ۶ ماه</div><div class="ph-desc">بازتنظیم Tolerance Family با Median / P75 / P90 و بررسی Outlierها.</div></div></div>
+  </div>
+
+  <!-- 08 MANAGEMENT RECOMMENDATION -->
+  <div class="section">
+    <div class="section-num">MANAGEMENT RECOMMENDATION / ۰۸</div>
+    <div class="section-head"><div class="bar"></div><h2>پیشنهاد نهایی برای تصمیم مدیریت</h2></div>
+
+    <div class="callout quote">
+      «تلورانس انحراف مصرف را خانوادگی تعریف کنیم؛ اثر را با Value Deviation بسنجیم؛ و تمرکز کنترل را با ABC تعیین کنیم.»
+    </div>
+
+    <h3 class="sub-head">چرا این مدل بهتر از ٪۵± واحد است؟</h3>
+    <p class="lead">چون هم تفاوت طبیعی خانواده‌ها را می‌بیند، هم مشکل اقلام کم‌مصرف را حل می‌کند، هم اثر مالی را وارد KPI می‌کند و هم منابع کنترلی را روی اقلام مهم متمرکز می‌سازد.</p>
+
+    <h3 class="sub-head">چرا فعلاً نباید استاندارد را از داده فعلی استخراج کنیم؟</h3>
+    <p class="lead">وقتی بخشی از انحراف‌های فعلی بسیار بالاست، استفاده از میانگین وضعیت موجود برای ساخت استاندارد می‌تواند عملکرد نامطلوب را به‌عنوان «استاندارد» تثبیت کند. ابتدا Control Limit اولیه، سپس Calibration با داده تمیز.</p>
+
+    <h3 class="sub-head">پیشنهاد اجرایی ۹۰ روزه</h3>
+    <div class="table-scroll">
+    <table class="std scrollable">
+      <thead><tr><th>فاز</th><th>خروجی</th><th>معیار موفقیت</th></tr></thead>
+      <tbody>
+        <tr><td class="num">۰–۳۰ روز</td><td>Data Master پاک + خانواده‌های استاندارد</td><td>۰ خانواده تکراری/نام‌گذاری شکسته</td></tr>
+        <tr><td class="num">۳۱–۶۰ روز</td><td>Value Deviation + گزارش AvT</td><td>ماده/خانواده/لوکیشن با یک منطق ثابت</td></tr>
+        <tr><td class="num">۶۱–۹۰ روز</td><td>ABC + Action Priority</td><td>تمرکز روی Top Leakage و A-items</td></tr>
+        <tr><td class="num">بعد از ۹۰ روز</td><td>Calibration</td><td>بازتنظیم تلورانس بر اساس داده واقعی</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout navy">
+      <b>مبنای تصمیم در KPI</b>
+      برای KPI سطح واحد، Signed Value Deviation% بهترین شاخص اصلی است؛ برای Drill-down ماده، Family-specific Qty Deviation% و Value Deviation؛ و برای اولویت اقدام، ABC + تکرار انحراف.
+    </div>
+  </div>
+
+  <!-- SOURCES -->
+  <div class="section">
+    <div class="section-head"><div class="bar"></div><h2>منابع و ملاحظات روش‌شناسی</h2></div>
+    <p class="lead" style="font-size:13.5px;">365Restaurant و MarketMan، Theoretical vs Actual را به‌عنوان روش مقایسه مصرف نظری ناشی از Sales/Recipe با مصرف واقعی معرفی می‌کنند؛ 365Restaurant همچنین امکان Drill-down در سطح آیتم، دسته و لوکیشن را در گزارش AvT توصیف می‌کند.</p>
+    <div class="links-box">
+      <p>Restaurant365 - Actual vs Theoretical Analysis: <a href="https://docs.restaurant365.com/doc/docs/actual-vs-theoretical-analysis" target="_blank" rel="noopener">docs.restaurant365.com/doc/docs/actual-vs-theoretical-analysis</a></p>
+      <p>MarketMan - Actual vs Theoretical Food Cost: <a href="https://www.marketman.com/blog/actual-vs-theoretical-food-cost" target="_blank" rel="noopener">marketman.com/blog/actual-vs-theoretical-food-cost</a></p>
+      <p>Oracle NetSuite - Actual vs. Theoretical Variance Reports: <a href="https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_159098386416.html" target="_blank" rel="noopener">docs.oracle.com/en/cloud/saas/netsuite/.../section_159098386416.html</a></p>
+      <p>ABC Analysis overview: <a href="https://en.wikipedia.org/wiki/ABC_analysis" target="_blank" rel="noopener">en.wikipedia.org/wiki/ABC_analysis</a></p>
+    </div>
+    <div class="callout" style="margin-top:16px;">
+      <b>یادداشت</b>
+      این گزارش بر اساس فایل فعلی «مواد اولیه.xlsx» تهیه شده است. چون فایل ورودی شامل Qty مصرف واقعی، Qty BOM و Cost به تفکیک دوره/لوکیشن نیست، ABC واقعی و Value Deviation واقعی در این گزارش محاسبه نشده و صرفاً چارچوب و آستانه‌های پیشنهادی ارائه شده‌اند.
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>چارچوب استاندارد کنترل انحراف مصرف — وانیلا</span>
+    <span>تاریخ تهیه: ۱۴۰۵/۰۷/۱۴</span>
+  </div>
+
+</div>
+
+</body>
+</html>

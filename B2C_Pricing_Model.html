@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>مدل قیمت‌گذاری B2C — وانیلا</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crimson:#A50021; --crimson-deep:#7A0018;
+    --navy:#1B2A4A; --navy-light:#2E4067;
+    --cream:#F3EBDA; --cream-deep:#E9DDC3;
+    --ink:#221C1A; --paper:#FBF7EF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;max-width:100%;overflow-x:hidden;}
+  body{font-family:'Vazirmatn', sans-serif;background:var(--paper);color:var(--ink);line-height:1.9;
+    padding-bottom:env(safe-area-inset-bottom,0px);}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px 90px;}
+
+  /* ===== Masthead ===== */
+  .masthead{background:var(--crimson);color:var(--cream);padding:calc(52px + env(safe-area-inset-top,0px)) 24px 46px;position:relative;overflow:hidden;}
+  .masthead::before{content:"";position:absolute;inset-inline-start:-90px;bottom:-110px;width:300px;height:300px;border-radius:50%;
+    border:1px solid rgba(243,235,218,.18);}
+  .masthead::after{content:"";position:absolute;inset-inline-end:-60px;top:-60px;width:240px;height:240px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--navy) 0%, transparent 70%);opacity:.38;}
+  .masthead .inner{max-width:980px;margin:0 auto;position:relative;z-index:1;}
+  .eyebrow-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(243,235,218,.3);
+    padding-bottom:16px;margin-bottom:30px;font-size:13.5px;color:rgba(243,235,218,.82);flex-wrap:wrap;gap:8px;}
+  .masthead h1{font-size:clamp(27px,4.4vw,40px);font-weight:900;margin:0 0 14px;letter-spacing:-.5px;max-width:760px;line-height:1.5;}
+  .masthead .sub{font-size:16px;color:rgba(243,235,218,.9);max-width:700px;}
+
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px;}
+  .fact{background:rgba(255,255,255,.08);border:1px solid rgba(243,235,218,.26);border-radius:8px;padding:14px 14px;text-align:center;}
+  .fact .v{font-size:26px;font-weight:900;color:#fff;line-height:1.3;}
+  .fact .k{font-size:12px;color:rgba(243,235,218,.8);margin-top:2px;}
+
+  /* ===== Sections ===== */
+  .section{margin-top:56px;}
+  .section-num{display:inline-block;font-size:11.5px;font-weight:700;color:var(--crimson-deep);background:var(--cream);
+    padding:3px 11px;border-radius:10px;margin-bottom:10px;letter-spacing:.3px;}
+  .section-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+  .section-head .bar{width:6px;height:30px;background:var(--crimson);border-radius:2px;flex:none;}
+  .section-head h2{font-size:22px;font-weight:800;color:var(--navy);margin:0;line-height:1.5;}
+  .section-note{color:#6b6058;font-size:14.5px;max-width:780px;margin:0 0 22px;}
+  .lead{font-size:15.5px;color:#3a332f;max-width:800px;margin:0 0 16px;}
+  h3.sub-head{font-size:16px;font-weight:700;color:var(--navy);margin:28px 0 10px;}
+
+  /* ===== Intro (the embellished part) ===== */
+  .intro-lead{font-size:17.5px;line-height:2.1;color:#2d2623;max-width:820px;margin:0 0 20px;border-inline-start:4px solid var(--crimson);padding-inline-start:18px;}
+  .pull-quote{position:relative;background:var(--navy);color:var(--cream);border-radius:10px;padding:26px 28px 26px 28px;margin:28px 0;
+    font-size:18px;font-weight:600;line-height:2;}
+  .pull-quote::before{content:"”";position:absolute;inset-inline-end:20px;top:-6px;font-size:84px;font-weight:900;color:var(--crimson);line-height:1;}
+  .pull-quote small{display:block;margin-top:10px;font-size:12.5px;font-weight:500;color:rgba(243,235,218,.7);}
+
+  .journey{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 22px;font-size:13px;}
+  .journey .node{background:var(--cream);color:var(--navy);font-weight:700;padding:7px 14px;border-radius:20px;border:1px solid var(--cream-deep);}
+  .journey .node.end{background:var(--crimson);color:#fff;border-color:var(--crimson);}
+  .journey .arr{color:var(--crimson);font-weight:800;}
+
+  .q-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:8px 0 6px;}
+  .q-card{background:var(--paper);border:1px solid var(--cream-deep);border-top:4px solid var(--crimson);border-radius:8px;padding:18px 18px 16px;}
+  .q-card .qn{font-size:12px;font-weight:800;color:var(--crimson-deep);margin-bottom:6px;}
+  .q-card .qt{font-size:15.5px;font-weight:800;color:var(--navy);margin-bottom:8px;line-height:1.7;}
+  .q-card .qa{font-size:13.5px;color:#4a4239;line-height:1.9;}
+
+  .callout{background:var(--cream);border-inline-start:3px solid var(--crimson);padding:16px 20px;border-radius:0 8px 8px 0;
+    font-size:14.5px;color:#453e38;margin:0 0 16px;}
+  .callout b{color:var(--navy);display:block;margin-bottom:4px;}
+  .callout.navy{border-inline-start-color:var(--navy);}
+
+  .path{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:10px;}
+  .path-step{background:var(--cream);border-radius:8px;padding:14px 16px;position:relative;}
+  .path-step .pn{width:30px;height:30px;border-radius:50%;background:var(--crimson);color:#fff;font-weight:800;font-size:13.5px;
+    display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
+  .path-step .pt{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:2px;}
+  .path-step .pd{font-size:12.5px;color:#5b534c;line-height:1.8;}
+
+  /* ===== Tables ===== */
+  .table-scroll{overflow-x:auto;border-radius:8px;border:1px solid var(--cream-deep);-webkit-overflow-scrolling:touch;margin-bottom:16px;}
+  table.std{width:100%;border-collapse:collapse;font-size:14px;}
+  table.std.scrollable{min-width:560px;}
+  table.std thead th{background:var(--navy);color:var(--cream);font-weight:600;text-align:start;padding:12px 14px;font-size:12.5px;}
+  table.std tbody td{padding:11px 14px;border-bottom:1px solid var(--cream-deep);vertical-align:middle;}
+  table.std tbody tr:nth-child(odd){background:var(--cream);}
+  table.std tbody tr:hover{background:#EFE3C7;}
+  table.std td.num{color:var(--navy);font-weight:700;white-space:nowrap;}
+  table.std td.name{font-weight:600;color:var(--ink);}
+  table.std td.ratio{white-space:nowrap;}
+
+  .tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 11px;border-radius:12px;white-space:nowrap;}
+  .tag.direct{background:var(--navy);color:#fff;}
+  .tag.oh{background:var(--cream-deep);color:var(--navy);border:1px solid #d9c9a3;}
+  tr:nth-child(odd) .tag.oh{background:#fff;}
+  .tag.pct{background:var(--crimson);color:#fff;}
+  .tag.special{background:transparent;color:var(--crimson-deep);border:1px dashed var(--crimson);}
+
+  .chip-strip{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px;}
+  .chip-strip .chip{display:flex;align-items:center;gap:8px;font-size:13px;color:#3a332f;background:var(--paper);border:1px solid var(--cream-deep);
+    border-radius:20px;padding:6px 14px 6px 10px;}
+  .chip-strip .chip b{font-size:15px;color:var(--navy);}
+
+  .ratio-wrap{display:flex;align-items:center;gap:10px;}
+  .ratio-track{width:90px;height:7px;background:var(--cream-deep);border-radius:4px;overflow:hidden;flex:none;}
+  .ratio-fill{height:100%;background:var(--crimson);border-radius:4px;}
+
+  .eq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:22px;}
+  .eq{background:var(--navy);color:var(--cream);border-radius:8px;padding:14px 16px;font-size:13.5px;text-align:center;line-height:1.9;}
+  .eq .over{display:block;font-weight:800;color:#fff;}
+  .eq .rule{display:block;height:1px;background:rgba(243,235,218,.55);margin:5px 12px;}
+
+  /* ===== Composition bars ===== */
+  .comp{background:var(--paper);border:1px solid var(--cream-deep);border-radius:8px;padding:8px 18px;margin-bottom:16px;}
+  .comp-row{display:grid;grid-template-columns:150px 1fr 70px;gap:14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--cream-deep);font-size:14px;}
+  .comp-row:last-child{border-bottom:none;}
+  .comp-row .cn{font-weight:600;color:var(--ink);}
+  .comp-row .ct{height:12px;background:var(--cream);border-radius:6px;overflow:hidden;}
+  .comp-row .cf{height:100%;min-width:4px;background:var(--navy);border-radius:6px;}
+  .comp-row .cf.hot{background:var(--crimson);}
+  .comp-row .cv{font-weight:800;color:var(--navy);text-align:left;white-space:nowrap;}
+  .comp-row.total{background:var(--cream);margin:6px -18px -8px;padding:12px 18px;border-radius:0 0 8px 8px;border-top:2px solid var(--navy);}
+  .comp-row.total .cn{color:var(--navy);font-weight:800;}
+  .comp-row.total .cf{background:var(--crimson-deep);}
+
+  /* ===== Levels ===== */
+  .levels{display:flex;flex-direction:column;gap:12px;margin:10px 0 18px;}
+  .level{display:grid;grid-template-columns:110px 1fr;border-radius:10px;overflow:hidden;border:1px solid var(--cream-deep);background:var(--paper);}
+  .level .lv{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 10px;color:#fff;text-align:center;}
+  .level .lv .ln{font-size:11.5px;letter-spacing:.5px;opacity:.85;}
+  .level .lv .lnum{font-size:30px;font-weight:900;line-height:1.2;}
+  .level.l1 .lv{background:var(--navy);}
+  .level.l2 .lv{background:var(--navy-light);}
+  .level.l3 .lv{background:var(--crimson);}
+  .level .lb{padding:16px 20px;}
+  .level .lb .lt{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:2px;}
+  .level .lb .le{font-size:12.5px;color:#8a8078;font-family:'Vazirmatn',sans-serif;margin-bottom:8px;}
+  .level .lb .ld{font-size:14px;color:#3a332f;}
+  .level .lb .lx{margin-top:8px;font-size:13px;color:#5b534c;}
+  .lchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .lchip{background:var(--cream);color:var(--navy);font-size:12.5px;font-weight:700;padding:4px 12px;border-radius:14px;}
+
+  /* ===== Formula ===== */
+  .formula-card{background:var(--navy);color:#fff;border-radius:12px;padding:30px 26px;margin:14px 0 20px;direction:ltr;
+    display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;position:relative;overflow:hidden;}
+  .formula-card::after{content:"";position:absolute;right:-50px;top:-50px;width:150px;height:150px;border-radius:50%;
+    background:radial-gradient(circle, rgba(165,0,33,.55) 0%, transparent 70%);}
+  .formula-card .lhs{font-size:clamp(18px,3vw,24px);font-weight:800;font-style:italic;font-family:Georgia,'Times New Roman',serif;position:relative;z-index:1;}
+  .frac{display:flex;flex-direction:column;align-items:center;max-width:100%;position:relative;z-index:1;}
+  .frac .top,.frac .bot{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:clamp(13px,2.3vw,19px);text-align:center;line-height:1.7;padding:0 6px;}
+  .frac .top{padding-bottom:10px;border-bottom:2px solid rgba(255,255,255,.85);}
+  .frac .bot{padding-top:10px;}
+  .frac .hl{color:#F3C7CF;}
+
+  .split-bar{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--cream-deep);margin:12px 0 8px;}
+  .split-bar div{display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;color:#fff;white-space:nowrap;min-width:0;}
+  .split-legend{display:flex;flex-wrap:wrap;gap:16px;font-size:12.5px;color:#5b534c;margin-bottom:6px;}
+  .split-legend span{display:flex;align-items:center;gap:6px;}
+  .split-legend i{width:12px;height:12px;border-radius:3px;display:inline-block;}
+
+  .illus{border:1px dashed var(--crimson);border-radius:10px;padding:18px 20px;background:#FFFDF8;margin:18px 0;}
+  .illus .it{font-size:13px;font-weight:800;color:var(--crimson-deep);margin-bottom:6px;}
+  .illus p{margin:0 0 8px;font-size:14px;color:#3a332f;}
+  .illus p:last-child{margin:0;}
+
+  .footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--cream-deep);font-size:12.5px;color:#8a8078;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:760px){
+    .facts{grid-template-columns:1fr 1fr;}
+    .comp-row{grid-template-columns:1fr 64px;gap:6px 10px;}
+    .comp-row .ct{grid-column:1 / -1;order:3;}
+    .level{grid-template-columns:1fr;}
+    .level .lv{flex-direction:row;gap:10px;padding:10px 14px;justify-content:flex-start;}
+    .level .lv .lnum{font-size:22px;}
+  }
+  @media (max-width:560px){
+    .masthead{padding-left:16px;padding-right:16px;}
+    .wrap{padding:0 16px 70px;}
+    .intro-lead{font-size:16px;}
+    .pull-quote{font-size:16px;padding:22px 20px;}
+    .section-head h2{font-size:19px;}
+    table.std{font-size:12.5px;}
+    table.std thead th, table.std tbody td{padding:9px 9px;}
+    .formula-card{padding:22px 14px;gap:10px;}
+    .split-bar div{font-size:11px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= MASTHEAD ================= -->
+<div class="masthead">
+  <div class="inner">
+    <div class="eyebrow-row">
+      <span>VANILLA • B2C Pricing Model</span>
+      <span>مدل پیشنهادی قیمت‌گذاری فروش به مصرف‌کننده</span>
+    </div>
+    <h1>از هزینه تا قیمتِ روی منو:<br>مدل قیمت‌گذاری B2C وانیلا</h1>
+    <p class="sub">چارچوبی سه‌سطحی که هزینه‌های پراکنده — از مواد اولیه و بسته‌بندی تا کمیسیون اسنپ‌فود و تخفیف‌ها — را به یک فرمول واحد و قابل دفاع برای قیمت فروش تبدیل می‌کند.</p>
+
+    <div class="facts">
+      <div class="fact"><div class="v">۲۳</div><div class="k">گروه هزینه در نقشه هزینه‌ها</div></div>
+      <div class="fact"><div class="v">۳</div><div class="k">سطح هزینه</div></div>
+      <div class="fact"><div class="v">۱</div><div class="k">فرمول نهایی قیمت</div></div>
+      <div class="fact"><div class="v">۳۸ درصد</div><div class="k">نمونه هزینه‌های درصدی از فروش</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ================= INTRO ================= -->
+  <div class="section" style="margin-top:44px;">
+    <div class="section-num">مقدمه</div>
+    <div class="section-head"><div class="bar"></div><h2>قیمت، آخرین جمله‌ی یک داستان بلند</h2></div>
+
+    <p class="intro-lead">قیمتی که روی منوی یک کافه‌قنادی می‌بینیم، ظاهراً فقط یک عدد است؛ اما در واقع «آخرین جمله» از یک داستان بلند است. داستانی که از انبار مواد اولیه شروع می‌شود، از کارگاه، آشپزخانه و پیشخوان شعبه می‌گذرد، سهم اجاره و حقوق و برق و نرم‌افزار را برمی‌دارد، از فیلتر کمیسیون اسنپ‌فود، کارمزد درگاه و تخفیف‌ها رد می‌شود — و اگر همه‌چیز درست حساب شده باشد، در پایان چیزی به نام «سود» برایش باقی می‌ماند.</p>
+
+    <div class="journey" aria-label="مسیر شکل‌گیری قیمت">
+      <span class="node">مواد و بسته‌بندی</span><span class="arr">←</span>
+      <span class="node">تولید در کارگاه / شعبه</span><span class="arr">←</span>
+      <span class="node">سربارها</span><span class="arr">←</span>
+      <span class="node">کمیسیون، کارمزد و تخفیف</span><span class="arr">←</span>
+      <span class="node end">قیمت فروش + سود</span>
+    </div>
+
+    <p class="lead">وانیلا شبکه‌ای از شعب، کارگاه و آشپزخانه‌هاست؛ یعنی یک محصول ممکن است در جایی ساخته و در جای دیگری فروخته شود، و بخشی از هزینه‌ها مخصوص محصول است، بخشی مخصوص محل تولید، و بخشی متعلق به کل شبکه. در چنین ساختاری، قیمت‌گذاری با فرمول ساده‌ی «مواد اولیه + یک ضریب ثابت» به‌راحتی دچار خطا می‌شود: یا هزینه‌هایی که با فروش بالا و پایین می‌روند (مثل کمیسیون و تخفیف) از قلم می‌افتند، یا سربارهای ثابت بدون منطق روی همه‌ی محصولات پخش می‌شوند.</p>
+
+    <div class="pull-quote">
+      هزینه‌هایی که درصدی از فروش‌اند، از خودِ قیمت کم می‌شوند — نه از هزینه‌ی تمام‌شده. به همین دلیل جایشان در مخرجِ فرمول است، نه در صورت.
+      <small>ایده‌ی مرکزی این مدل</small>
+    </div>
+
+    <h3 class="sub-head">این گزارش به سه پرسش جواب می‌دهد</h3>
+    <div class="q-grid">
+      <div class="q-card">
+        <div class="qn">پرسش ۱</div>
+        <div class="qt">چه هزینه‌هایی را باید ببینیم؟</div>
+        <div class="qa">نقشه‌ی ۲۳ گروه هزینه، به‌همراه روش محاسبه‌ی پیشنهادی هرکدام: مستقیم از BOM، سربار، یا درصدی از فروش.</div>
+      </div>
+      <div class="q-card">
+        <div class="qn">پرسش ۲</div>
+        <div class="qt">هر هزینه را روی کدام سطح بنشانیم؟</div>
+        <div class="qa">سه سطح هزینه: هزینه‌ی محصول، هزینه‌ی تولید و عملیات، و هزینه‌ی شرکت — تا هیچ هزینه‌ای دوبار شمرده نشود یا جا نماند.</div>
+      </div>
+      <div class="q-card">
+        <div class="qn">پرسش ۳</div>
+        <div class="qt">چطور همه را به یک قیمت برسانیم؟</div>
+        <div class="qa">فرمولی که مجموع هزینه‌های مستقیم و تخصیص‌یافته را بر «۱ منهای هزینه‌های فروش منهای سود هدف» تقسیم می‌کند.</div>
+      </div>
+    </div>
+
+    <div class="callout navy" style="margin-top:18px;">
+      <b>اصل راهنما: داده‌ی واقعی، نه حدس</b>
+      نسبت‌های درصدی از فروش (تعمیرات، هزینه‌های متفرقه، ضایعات و مرجوعی و…) باید از داده‌ی واقعی ۱۲ ماه گذشته‌ی خودِ وانیلا استخراج شوند. اعداد جدول‌ها و نمودارهای بخش دوم در این گزارش، نمونه‌ی توضیحی هستند و جایگزین داده‌ی واقعی نمی‌شوند.
+    </div>
+
+    <h3 class="sub-head">مسیر خواندن گزارش</h3>
+    <div class="path">
+      <div class="path-step"><div class="pn">۱</div><div class="pt">نقشه‌ی هزینه‌ها</div><div class="pd">همه‌ی گروه‌های هزینه و نحوه‌ی محاسبه‌ی هرکدام</div></div>
+      <div class="path-step"><div class="pn">۲</div><div class="pt">هزینه‌های درصدی از فروش</div><div class="pd">Selling Cost: روش استخراج و یک نمونه‌ی عددی</div></div>
+      <div class="path-step"><div class="pn">۳</div><div class="pt">سه سطح هزینه</div><div class="pd">محصول، تولید و عملیات، شرکت</div></div>
+      <div class="path-step"><div class="pn">۴</div><div class="pt">فرمول نهایی قیمت</div><div class="pd">تعریف اجزا و یک مثال توضیحی</div></div>
+    </div>
+  </div>
+
+  <!-- ================= 01 COST MAP ================= -->
+  <div class="section">
+    <div class="section-num">بخش ۰۱</div>
+    <div class="section-head"><div class="bar"></div><h2>چه هزینه‌هایی را باید ببینید؟</h2></div>
+    <p class="section-note">فهرست زیر، گروه‌های هزینه‌ای است که در قیمت‌گذاری باید دیده شوند. ستون سوم نشان می‌دهد هر گروه از چه مسیری وارد محاسبه می‌شود.</p>
+
+    <div class="chip-strip">
+      <span class="chip"><span class="tag direct">مستقیم</span><b>۲</b> گروه</span>
+      <span class="chip"><span class="tag oh">سربار</span><b>۱۱</b> گروه</span>
+      <span class="chip"><span class="tag pct">درصد فروش</span><b>۶</b> گروه</span>
+      <span class="chip"><span class="tag special">حالت خاص</span><b>۴</b> گروه</span>
+    </div>
+
+    <div class="table-scroll">
+    <table class="std scrollable">
+      <thead><tr><th>گروه هزینه</th><th>نحوه محاسبه پیشنهادی</th><th>مسیر ورود</th></tr></thead>
+      <tbody>
+        <tr><td class="name">مواد اولیه</td><td>مستقیم از BOM</td><td><span class="tag direct">مستقیم</span></td></tr>
+        <tr><td class="name">بسته‌بندی</td><td>مستقیم از BOM/Packaging</td><td><span class="tag direct">مستقیم</span></td></tr>
+        <tr><td class="name">حقوق و بیمه</td><td>سربار</td><td><span class="tag oh">سربار</span></td></tr>
+        <tr><td class="name">اجاره</td><td>سربار</td><td><span class="tag oh">سربار</span></td></tr>
+        <tr><td class="name">آب، برق، گاز، تلفن و…</td><td>سربار</td><td><span class="tag oh">سربار</span></td></tr>
+        <tr><td class="name">تعمیر و نگهداری تجهیزات</td><td>ذخیره هزینه به‌صورت درصد فروش</td><td><span class="tag pct">درصد فروش</span></td></tr>
+        <tr><td class="name">استهلاک تجهیزات و ماشین‌آلات</td><td>سربار</td><td><span class="tag oh">سربار</span></td></tr>
+        <tr><td class="name">نظافت و مواد مصرفی</td><td>سربار</td><td><span class="tag oh">سربار</span></td></tr>
+        <tr><td class="name">سم‌پاشی و کنترل آفات</td><td>سربار</td><td><span class="tag oh">سربار</span></td></tr>
+        <tr><td class="name">هزینه‌های نرم‌افزار، ERP، اینترنت و سیستم‌ها</td><td>سربار</td><td><span class="tag oh">سربار</span></td></tr>
+        <tr><td class="name">هزینه حسابداری، مالی، حقوقی و اداری</td><td>سربار</td><td><span class="tag oh">سربار</span></td></tr>
+        <tr><td class="name">بیمه‌های غیرپرسنلی</td><td>سربار</td><td><span class="tag oh">سربار</span></td></tr>
+        <tr><td class="name">مجوزها و هزینه‌های قانونی</td><td>سربار</td><td><span class="tag oh">سربار</span></td></tr>
+        <tr><td class="name">لباس کار و تجهیزات مصرفی پرسنل</td><td>سربار</td><td><span class="tag oh">سربار</span></td></tr>
+        <tr><td class="name">حمل‌ونقل داخلی / لجستیک</td><td>در صورت وجود</td><td><span class="tag special">حالت خاص</span></td></tr>
+        <tr><td class="name">تبلیغات و مارکتینگ</td><td>ترجیحاً جداگانه</td><td><span class="tag special">حالت خاص</span></td></tr>
+        <tr><td class="name">کارمزد POS / درگاه و هزینه‌های بانکی</td><td>درصد فروش</td><td><span class="tag pct">درصد فروش</span></td></tr>
+        <tr><td class="name">تخفیف و پروموشن</td><td>درصد فروش</td><td><span class="tag pct">درصد فروش</span></td></tr>
+        <tr><td class="name">ضایعات و مرجوعی</td><td>درصد فروش یا در بهای تمام‌شده</td><td><span class="tag pct">درصد فروش</span></td></tr>
+        <tr><td class="name">هزینه‌های پیش‌بینی‌نشده</td><td>ذخیره درصد فروش</td><td><span class="tag pct">درصد فروش</span></td></tr>
+        <tr><td class="name">کمیسیون اسنپ‌فود</td><td>درصد فروش</td><td><span class="tag pct">درصد فروش</span></td></tr>
+        <tr><td class="name">مالیات عملکرد</td><td>روی سود مشمول مالیات، نه مستقیماً روی فروش</td><td><span class="tag special">حالت خاص</span></td></tr>
+        <tr><td class="name">سود هدف</td><td>درصدی از قیمت فروش</td><td><span class="tag special">حالت خاص</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout">
+      <b>چهار حالت خاص</b>
+      حمل‌ونقل داخلی فقط در صورت وجود وارد می‌شود؛ تبلیغات و مارکتینگ ترجیحاً جداگانه دیده می‌شود؛ مالیات عملکرد روی سود مشمول مالیات محاسبه می‌شود و نباید مستقیماً به‌عنوان درصدی از فروش وارد قیمت شود؛ و سود هدف خودش درصدی از قیمت فروش است، نه از هزینه.
+    </div>
+  </div>
+
+  <!-- ================= 02 SELLING COST ================= -->
+  <div class="section">
+    <div class="section-num">بخش ۰۲</div>
+    <div class="section-head"><div class="bar"></div><h2>Selling Cost — هزینه‌هایی که درصدی از فروش‌اند</h2></div>
+    <p class="section-note">این بخش را بهتر است از داده‌های واقعی خودتان استخراج کنید. سه نسبت پایه، از روی ۱۲ ماه گذشته محاسبه می‌شود:</p>
+
+    <div class="eq-grid">
+      <div class="eq"><span class="over">تعمیرات ۱۲ ماه گذشته</span><span class="rule"></span><span class="over">فروش ۱۲ ماه گذشته</span></div>
+      <div class="eq"><span class="over">هزینه‌های متفرقه ۱۲ ماه گذشته</span><span class="rule"></span><span class="over">فروش ۱۲ ماه گذشته</span></div>
+      <div class="eq"><span class="over">ضایعات و مرجوعی ۱۲ ماه گذشته</span><span class="rule"></span><span class="over">فروش ۱۲ ماه گذشته</span></div>
+    </div>
+
+    <h3 class="sub-head">مثال: استخراج نسبت از روی فروش سالانه</h3>
+    <div class="table-scroll">
+    <table class="std scrollable">
+      <thead><tr><th>آیتم</th><th>فروش سالانه</th><th>هزینه</th><th>نسبت</th></tr></thead>
+      <tbody>
+        <tr><td class="name">تعمیرات</td><td class="num">۱۰۰ میلیارد</td><td class="num">۱٫۸ میلیارد</td><td class="ratio"><div class="ratio-wrap"><b>۱٫۸ درصد</b><span class="ratio-track"><span class="ratio-fill" style="width:60%"></span></span></div></td></tr>
+        <tr><td class="name">هزینه متفرقه</td><td class="num">۱۰۰ میلیارد</td><td class="num">۲٫۳ میلیارد</td><td class="ratio"><div class="ratio-wrap"><b>۲٫۳ درصد</b><span class="ratio-track"><span class="ratio-fill" style="width:77%"></span></span></div></td></tr>
+        <tr><td class="name">بانکی</td><td class="num">۱۰۰ میلیارد</td><td class="num">۰٫۵ میلیارد</td><td class="ratio"><div class="ratio-wrap"><b>۰٫۵ درصد</b><span class="ratio-track"><span class="ratio-fill" style="width:17%"></span></span></div></td></tr>
+        <tr><td class="name">ضایعات / مرجوعی</td><td class="num">۱۰۰ میلیارد</td><td class="num">۱٫۲ میلیارد</td><td class="ratio"><div class="ratio-wrap"><b>۱٫۲ درصد</b><span class="ratio-track"><span class="ratio-fill" style="width:40%"></span></span></div></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 class="sub-head">مثال: ترکیب هزینه‌های درصدی از فروش (Selling Cost%)</h3>
+    <div class="comp">
+      <div class="comp-row"><div class="cn">تخفیف‌ها</div><div class="ct"><div class="cf hot" style="width:50%"></div></div><div class="cv">۲۰ درصد</div></div>
+      <div class="comp-row"><div class="cn">اسنپ‌فود</div><div class="ct"><div class="cf" style="width:27.5%"></div></div><div class="cv">۱۱ درصد</div></div>
+      <div class="comp-row"><div class="cn">هزینه پیش‌بینی‌نشده</div><div class="ct"><div class="cf" style="width:7.5%"></div></div><div class="cv">۳ درصد</div></div>
+      <div class="comp-row"><div class="cn">تعمیرات</div><div class="ct"><div class="cf" style="width:5%"></div></div><div class="cv">۲ درصد</div></div>
+      <div class="comp-row"><div class="cn">سایر هزینه‌های متغیر</div><div class="ct"><div class="cf" style="width:3.75%"></div></div><div class="cv">۱٫۵ درصد</div></div>
+      <div class="comp-row"><div class="cn">هزینه بانکی</div><div class="ct"><div class="cf" style="width:1.25%"></div></div><div class="cv">۰٫۵ درصد</div></div>
+      <div class="comp-row total"><div class="cn">جمع</div><div class="ct"><div class="cf" style="width:95%"></div></div><div class="cv">۳۸ درصد</div></div>
+    </div>
+
+    <div class="callout">
+      <b>یک نگاه به ترکیب</b>
+      در این نمونه، تخفیف‌ها (۲۰ از ۳۸ درصد) بیش از نیمی از کل هزینه‌های درصدی از فروش را می‌سازند و کمیسیون اسنپ‌فود حدود ۲۹ درصد آن را. یعنی دو قلم، نزدیک به ۸۲ درصد از این بسته را تشکیل می‌دهند — و کنترل همین دو قلم بیشترین اثر را روی قیمت نهایی دارد.
+    </div>
+  </div>
+
+  <!-- ================= 03 LEVELS ================= -->
+  <div class="section">
+    <div class="section-num">بخش ۰۳</div>
+    <div class="section-head"><div class="bar"></div><h2>مدل نهایی پیشنهادی: سه سطح هزینه</h2></div>
+    <p class="section-note">در واقع باید سه سطح هزینه داشته باشید؛ هر سطح به یک پرسش متفاوت جواب می‌دهد و هزینه‌ها را در جای درست خودشان می‌نشاند.</p>
+
+    <div class="levels">
+      <div class="level l1">
+        <div class="lv"><span class="ln">LEVEL</span><span class="lnum">۱</span></div>
+        <div class="lb">
+          <div class="lt">هزینه محصول</div>
+          <div class="le">Level 1 — Product Cost</div>
+          <div class="ld">برای هر محصول به‌صورت جداگانه محاسبه می‌شود.</div>
+          <div class="lchips"><span class="lchip">مواد</span><span class="lchip">بسته‌بندی</span></div>
+        </div>
+      </div>
+      <div class="level l2">
+        <div class="lv"><span class="ln">LEVEL</span><span class="lnum">۲</span></div>
+        <div class="lb">
+          <div class="lt">هزینه تولید و عملیات</div>
+          <div class="le">Level 2 — Production &amp; Operating Cost</div>
+          <div class="ld">بسته به اینکه محصول کجا تولید می‌شود.</div>
+          <div class="lchips"><span class="lchip">کارگاه / شعبه</span><span class="lchip">سربار مربوطه</span></div>
+        </div>
+      </div>
+      <div class="level l3">
+        <div class="lv"><span class="ln">LEVEL</span><span class="lnum">۳</span></div>
+        <div class="lb">
+          <div class="lt">هزینه شرکت</div>
+          <div class="le">Level 3 — Company Cost</div>
+          <div class="ld">هزینه‌هایی که برای کل شبکه است.</div>
+          <div class="lchips"><span class="lchip">Central Overhead</span><span class="lchip">Selling Cost</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 04 FORMULA ================= -->
+  <div class="section">
+    <div class="section-num">بخش ۰۴</div>
+    <div class="section-head"><div class="bar"></div><h2>و نهایتاً: فرمول قیمت</h2></div>
+
+    <div class="formula-card" role="img" aria-label="Price برابر است با Material به‌علاوه Packaging به‌علاوه Production به‌علاوه Allocated Overhead تقسیم بر یک منهای Selling Cost درصد منهای Target Profit درصد">
+      <div class="lhs">Price =</div>
+      <div class="frac">
+        <div class="top">Material + Packaging + Production + Allocated Overhead</div>
+        <div class="bot">1 − <span class="hl">Selling Cost%</span> − <span class="hl">Target Profit%</span></div>
+      </div>
+    </div>
+
+    <h3 class="sub-head">اجزای فرمول</h3>
+    <div class="table-scroll">
+    <table class="std scrollable">
+      <thead><tr><th>جزء</th><th>معنی</th><th>جایگاه</th></tr></thead>
+      <tbody>
+        <tr><td class="name">Material</td><td>مواد اولیه محصول، مستقیم از BOM</td><td><span class="tag direct">صورت کسر</span></td></tr>
+        <tr><td class="name">Packaging</td><td>بسته‌بندی محصول، مستقیم از BOM/Packaging</td><td><span class="tag direct">صورت کسر</span></td></tr>
+        <tr><td class="name">Production</td><td>هزینه تولید، بسته به محل ساخت محصول (کارگاه یا شعبه)</td><td><span class="tag direct">صورت کسر</span></td></tr>
+        <tr><td class="name">Allocated Overhead</td><td>سهم تخصیص‌یافته‌ی محصول از سربارها</td><td><span class="tag direct">صورت کسر</span></td></tr>
+        <tr><td class="name">Selling Cost%</td><td>مجموع هزینه‌های درصدی از فروش (مانند کمیسیون، تخفیف، کارمزد، ضایعات و مرجوعی)</td><td><span class="tag pct">مخرج</span></td></tr>
+        <tr><td class="name">Target Profit%</td><td>سود هدف، به‌صورت درصدی از قیمت فروش</td><td><span class="tag pct">مخرج</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout navy">
+      <b>چرا مخرج «۱ منهای…» است؟</b>
+      چون Selling Cost% و Target Profit% هر دو سهمی از <i>قیمت فروش</i> هستند، نه از هزینه. اگر قرار است از هر ۱۰۰ واحد قیمت، مثلاً ۳۸ واحد صرف هزینه‌های فروش شود، فقط ۶۲ واحد باقی می‌ماند که باید هم هزینه‌ها و هم سود را پوشش دهد — و فرمول، همین را به‌صورت تقسیم بر «۱ منهای سهم‌ها» اعمال می‌کند.
+    </div>
+
+    <div class="illus">
+      <div class="it">مثال توضیحی — اعداد فرضی و فقط برای فهم مفهوم</div>
+      <p>فرض کنید مجموع صورت کسر (مواد، بسته‌بندی، تولید و سربار تخصیص‌یافته) برابر ۱۰۰ واحد باشد، هزینه‌های درصدی از فروش ۳۸ درصد (همان نمونه‌ی بالا) و سود هدف ۱۰ درصد (فرض توضیحی).</p>
+      <p><b>قیمت = ۱۰۰ ÷ (۱ − ۰٫۳۸ − ۰٫۱۰) = ۱۰۰ ÷ ۰٫۵۲ ≈ ۱۹۲٫۳ واحد</b></p>
+      <div class="split-bar" role="img" aria-label="ترکیب قیمت: ۵۲ درصد هزینه، ۳۸ درصد هزینه‌های فروش، ۱۰ درصد سود">
+        <div style="width:52%;background:#1B2A4A;">هزینه ۵۲ درصد</div>
+        <div style="width:38%;background:#A50021;">هزینه‌های فروش ۳۸ درصد</div>
+        <div style="width:10%;background:#7A6A45;">سود</div>
+      </div>
+      <div class="split-legend">
+        <span><i style="background:#1B2A4A"></i>هزینه‌ها (۱۰۰ واحد)</span>
+        <span><i style="background:#A50021"></i>هزینه‌های فروش (≈ ۷۳٫۱ واحد)</span>
+        <span><i style="background:#7A6A45"></i>سود هدف (≈ ۱۹٫۲ واحد)</span>
+      </div>
+      <p style="margin-top:10px;"><b>دام رایج:</b> اگر به‌جای تقسیم، ۴۸ درصد (۳۸ + ۱۰) روی هزینه اضافه شود، قیمت ۱۴۸ می‌شود؛ اما از ۱۴۸ واحد، ۳۸ درصد (≈ ۵۶٫۲) صرف هزینه‌های فروش و ۱۰ درصد (≈ ۱۴٫۸) سود می‌شود و فقط حدود ۷۷ واحد برای پوشش هزینه‌ی ۱۰۰ واحدی باقی می‌ماند. به همین دلیل نسبت‌های درصدی از فروش باید در مخرج بیایند.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>مدل قیمت‌گذاری B2C — وانیلا</span>
+    <span>چارچوب پیشنهادی؛ اعداد نمونه باید با داده‌ی واقعی ۱۲ ماه گذشته جایگزین شوند</span>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>گزارش بهای تمام‌شده و سربار هر واحد</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#a50021;--navy:#14275c;--cream:#f8f2e4;--paper:#fffcf5;--ink:#1d2236;--line:#e2d8bf;--mute:#5b6178;--bar:#14275c;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9;font-size:15px}
+.wrap{max-width:920px;margin:0 auto;padding:0 18px 60px}
+header{background:#14275c;color:#fff;padding:42px 18px 34px;border-bottom:6px solid var(--red)}
+header .in{max-width:920px;margin:0 auto}header h1{margin:0 0 8px;font-size:27px;font-weight:800;line-height:1.5;color:#fff}header p{margin:0;color:#fff;opacity:.85}
+h2{font-size:20px;color:var(--red);margin:38px 0 10px;padding-right:12px;border-right:4px solid var(--red);font-weight:800}
+p{margin:6px 0}.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:var(--paper);font-size:14px;margin:10px 0}
+th{background:#14275c;color:#fff;text-align:right;padding:8px 10px;font-weight:600}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+td.n{white-space:nowrap;text-align:left;direction:ltr}td.k{font-weight:800;color:var(--navy)}
+tfoot td,tr.tot td{background:var(--cream);font-weight:800;color:var(--navy)}tr.hl td{background:var(--cream);font-weight:800}
+.box{background:var(--paper);border:1px solid var(--line);border-right:4px solid var(--navy);padding:12px 16px;margin:12px 0}
+.box.r{border-right-color:var(--red)}
+.big{background:var(--red);color:#fff !important;padding:18px 22px;margin:26px 0;font-size:19px;font-weight:800;line-height:1.8}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--paper);border:1px solid var(--line);border-top:4px solid var(--red);padding:12px 16px}
+.kpi b{display:block;font-size:22px;color:var(--navy);font-weight:800;line-height:1.5}.kpi span{font-size:13px;color:var(--mute)}
+td.bar{min-width:140px;width:26%}.b{display:flex;height:14px;background:var(--cream);direction:ltr}.b i{background:var(--bar);display:block}.b u{background:var(--red);display:block}
+.lg{font-size:12.5px;color:var(--mute)}.lg s{display:inline-block;width:10px;height:10px;margin:0 4px 0 12px;text-decoration:none}
+.note{font-size:12.5px;color:var(--mute)}ul{margin:6px 0;padding-right:20px}li{margin:3px 0}
+@media print{header,.big{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header><div class="in"><h1>گزارش بهای تمام‌شده و سربار هر واحد</h1>
+<p>آبان ۱۴۰۵ | مبالغ به ریال | این گزارش تا مرحله محاسبه سربار است و قیمت‌گذاری نهایی در مرحله بعد انجام می‌شود</p></div></header>
+<div class="wrap">
+
+<h2>دامنه و فرض اصلی</h2>
+<p>در این مرحله، هزینه مواد اولیه هر محصول (BOM)، هزینه‌های مرتبط با تولید از سمت کارگاه و هزینه‌های گزارش مالی در کنار هم قرار گرفته و سربار هر واحد محاسبه شده است.</p>
+<div class="box r"><b>فرض اصلی: تولید ماهانه ۱۵۰٬۰۰۰ عدد.</b> کل هزینه‌های سربار بر این تعداد تقسیم شده و تولید همه محصولات یکسان فرض شده است (۸ محصول، حدود ۱۸٬۷۵۰ عدد برای هر محصول). تعداد تولید در سربار هر واحد رابطه مستقیم و مهم دارد: هر چه تولید ماهانه کمتر شود، سربار هر واحد بالاتر می‌رود.</div>
+<div class="kpis">
+<div class="kpi"><b>۱۳٬۴۸۱٬۶۱۹٬۰۷۲</b><span>کل هزینه سربار ماهانه (ریال)</span></div>
+<div class="kpi"><b>۸۹٬۸۷۷</b><span>سربار هر واحد در تولید ۱۵۰ هزار عدد (ریال)</span></div>
+</div>
+
+<h2>۱. هزینه مواد اولیه هر واحد (BOM)</h2>
+<div class="scroll"><table><tr><th>محصول</th><th>BOM هر واحد (ریال)</th></tr>
+<tr><td>پن شکلات (استفاده از کارات تلخ)</td><td class="n">۴۵۹٬۱۵۲</td></tr><tr><td>چاکلت توئیست مغازه‌ای</td><td class="n">۳۷۹٬۹۷۹</td></tr><tr><td>کراسان ساده مغازه‌ای</td><td class="n">۳۳۳٬۴۳۰</td></tr><tr><td>گلت بادام</td><td class="n">۱٬۱۹۲٬۷۶۳</td></tr><tr><td>پن سوئیس</td><td class="n">۷۴۴٬۳۷۴</td></tr><tr><td>رول دارچین</td><td class="n">۹۷۶٬۲۲۷</td></tr><tr><td>گلت بادام زمینی</td><td class="n">۹۵۲٬۷۶۳</td></tr><tr><td>گلت سیب - گرد</td><td class="n">۷۲۴٬۳۶۰</td></tr></table></div>
+
+<h2>۲. هزینه‌های مرتبط با تولید (از سمت کارگاه)</h2>
+<div class="scroll"><table><tr><th>شرح (ماهانه)</th><th>مبلغ (ریال)</th><th>سهم از کل سربار</th></tr>
+<tr><td>حقوق ماهانه</td><td class="n">۳٬۶۳۰٬۰۰۰٬۰۰۰</td><td class="n">۲۶٫۹٪</td></tr><tr><td>بیمه سهم کارفرما</td><td class="n">۷۰۰٬۰۰۰٬۰۰۰</td><td class="n">۵٫۲٪</td></tr><tr><td>عیدی</td><td class="n">۲۶۷٬۰۰۰٬۰۰۰</td><td class="n">۲٫۰٪</td></tr><tr><td>سنوات</td><td class="n">۱۳۳٬۵۰۰٬۰۰۰</td><td class="n">۱٫۰٪</td></tr><tr><td>اضافه‌کاری</td><td class="n">۶۱۰٬۰۰۰٬۰۰۰</td><td class="n">۴٫۵٪</td></tr><tr><td>پاداش</td><td class="n">۱٬۰۰۰٬۰۰۰٬۰۰۰</td><td class="n">۷٫۴٪</td></tr><tr><td>بسته‌بندی و وکیوم</td><td class="n">۱٬۰۰۰٬۰۰۰٬۰۰۰</td><td class="n">۷٫۴٪</td></tr><tr><td>تعمیرات و نگهداری وکیوم، شیتر و میکسر</td><td class="n">۱۵۰٬۰۰۰٬۰۰۰</td><td class="n">۱٫۱٪</td></tr><tr><td>هزینه‌های جانبی (نایلون، درب جعبه، ناهار، تیغ کاتر)</td><td class="n">۲٬۰۰۰٬۰۰۰٬۰۰۰</td><td class="n">۱۴٫۸٪</td></tr><tr class="tot"><td>جمع هزینه‌های کارگاه</td><td class="n">۹٬۴۹۰٬۵۰۰٬۰۰۰</td><td class="n">۷۰٫۴٪</td></tr></table></div>
+<p class="note">طبق یادداشت فایل کارگاه، این جمع هزینه آب و برق، اجاره، استهلاک و هزینه نگهداری هر واحد کالا در سردخانه را شامل نمی‌شود.</p>
+
+<h2>۳. هزینه‌های گزارش مالی</h2>
+<div class="scroll"><table><tr><th>شرح (ماهانه)</th><th>مبلغ (ریال)</th><th>سهم از کل سربار</th></tr>
+<tr><td>سربار و استهلاک تجهیزات</td><td class="n">۳٬۱۵۷٬۸۷۶٬۷۷۶</td><td class="n">۲۳٫۴٪</td></tr><tr><td>استهلاک و نگهداری خودرو</td><td class="n">۷۷۷٬۱۵۰٬۰۴۶</td><td class="n">۵٫۸٪</td></tr><tr><td>سوخت و توزیع در چند مقصد در تهران</td><td class="n">۵۶٬۰۹۲٬۲۵۰</td><td class="n">۰٫۴٪</td></tr><tr class="tot"><td>جمع هزینه‌های گزارش مالی</td><td class="n">۳٬۹۹۱٬۱۱۹٬۰۷۲</td><td class="n">۲۹٫۶٪</td></tr></table></div>
+
+<h2>۴. کل سربار و سربار هر واحد</h2>
+<div class="scroll"><table>
+<tr><td>جمع هزینه‌های کارگاه</td><td class="n">۹٬۴۹۰٬۵۰۰٬۰۰۰</td></tr>
+<tr><td>جمع هزینه‌های گزارش مالی</td><td class="n">۳٬۹۹۱٬۱۱۹٬۰۷۲</td></tr>
+<tr class="tot"><td>کل سربار ماهانه</td><td class="n">۱۳٬۴۸۱٬۶۱۹٬۰۷۲</td></tr>
+<tr><td>تولید ماهانه فرض‌شده</td><td class="n">۱۵۰٬۰۰۰ عدد</td></tr>
+<tr class="tot"><td>سربار هر واحد = کل سربار ÷ تولید ماهانه</td><td class="n">۸۹٬۸۷۷٫۴۶</td></tr></table></div>
+<p>سربار هر واحد حدود ۸۹٬۸۷۷ ریال به دست می‌آید که با محاسبه اولیه تطابق دارد و برای همه محصولات یکسان است.</p>
+
+<h2>۵. بهای تمام‌شده هر محصول (BOM + سربار)</h2>
+<div class="scroll"><table><tr><th>محصول</th><th>BOM</th><th>سربار</th><th>بهای تمام‌شده</th><th>سهم سربار</th><th>ترکیب</th></tr>
+<tr><td>پن شکلات</td><td class="n">۴۵۹٬۱۵۲</td><td class="n">۸۹٬۸۷۷</td><td class="n k">۵۴۹٬۰۲۹</td><td class="n">۱۶٫۴٪</td><td class="bar"><div class="b"><i style="width:35.8%"></i><u style="width:7.0%"></u></div></td></tr><tr><td>چاکلت توئیست مغازه‌ای</td><td class="n">۳۷۹٬۹۷۹</td><td class="n">۸۹٬۸۷۷</td><td class="n k">۴۶۹٬۸۵۶</td><td class="n">۱۹٫۱٪</td><td class="bar"><div class="b"><i style="width:29.6%"></i><u style="width:7.0%"></u></div></td></tr><tr><td>کراسان ساده مغازه‌ای</td><td class="n">۳۳۳٬۴۳۰</td><td class="n">۸۹٬۸۷۷</td><td class="n k">۴۲۳٬۳۰۷</td><td class="n">۲۱٫۲٪</td><td class="bar"><div class="b"><i style="width:26.0%"></i><u style="width:7.0%"></u></div></td></tr><tr><td>گلت بادام</td><td class="n">۱٬۱۹۲٬۷۶۳</td><td class="n">۸۹٬۸۷۷</td><td class="n k">۱٬۲۸۲٬۶۴۰</td><td class="n">۷٫۰٪</td><td class="bar"><div class="b"><i style="width:93.0%"></i><u style="width:7.0%"></u></div></td></tr><tr><td>پن سوئیس</td><td class="n">۷۴۴٬۳۷۴</td><td class="n">۸۹٬۸۷۷</td><td class="n k">۸۳۴٬۲۵۱</td><td class="n">۱۰٫۸٪</td><td class="bar"><div class="b"><i style="width:58.0%"></i><u style="width:7.0%"></u></div></td></tr><tr><td>رول دارچین</td><td class="n">۹۷۶٬۲۲۷</td><td class="n">۸۹٬۸۷۷</td><td class="n k">۱٬۰۶۶٬۱۰۴</td><td class="n">۸٫۴٪</td><td class="bar"><div class="b"><i style="width:76.1%"></i><u style="width:7.0%"></u></div></td></tr><tr><td>گلت بادام زمینی</td><td class="n">۹۵۲٬۷۶۳</td><td class="n">۸۹٬۸۷۷</td><td class="n k">۱٬۰۴۲٬۶۴۰</td><td class="n">۸٫۶٪</td><td class="bar"><div class="b"><i style="width:74.3%"></i><u style="width:7.0%"></u></div></td></tr><tr><td>گلت سیب - گرد</td><td class="n">۷۲۴٬۳۶۰</td><td class="n">۸۹٬۸۷۷</td><td class="n k">۸۱۴٬۲۳۷</td><td class="n">۱۱٫۰٪</td><td class="bar"><div class="b"><i style="width:56.5%"></i><u style="width:7.0%"></u></div></td></tr></table></div>
+<p class="lg"><s style="background:var(--bar)"></s>مواد اولیه<s style="background:var(--red)"></s>سربار</p>
+<p>در محصولات ارزان‌تر مثل کراسان ساده و چاکلت توئیست مغازه‌ای، سربار بیش از ۱۹٪ بهای تمام‌شده را تشکیل می‌دهد، ولی در گلت بادام حدود ۷٪ است. چون سربار برای همه واحدها یکسان تقسیم شده، فاصله بهای تمام‌شده محصولات با BOM یکی است.</p>
+
+<h2>۶. حساسیت سربار هر واحد به حجم تولید</h2>
+<div class="scroll"><table><tr><th>تولید ماهانه (عدد)</th><th>سربار هر واحد (ریال)</th><th>تغییر نسبت به ۱۵۰ هزار</th><th></th></tr><tr><td>۲۰۰٬۰۰۰</td><td class="n">۶۷٬۴۰۸</td><td class="n">−۲۵٪</td><td class="bar"><div class="b"><u style="width:25.0%"></u></div></td></tr><tr class="hl"><td>۱۵۰٬۰۰۰</td><td class="n">۸۹٬۸۷۷</td><td class="n">پایه</td><td class="bar"><div class="b"><u style="width:33.3%"></u></div></td></tr><tr><td>۱۲۰٬۰۰۰</td><td class="n">۱۱۲٬۳۴۷</td><td class="n">+۲۵٪</td><td class="bar"><div class="b"><u style="width:41.7%"></u></div></td></tr><tr><td>۱۰۰٬۰۰۰</td><td class="n">۱۳۴٬۸۱۶</td><td class="n">+۵۰٪</td><td class="bar"><div class="b"><u style="width:50.0%"></u></div></td></tr><tr><td>۷۵٬۰۰۰</td><td class="n">۱۷۹٬۷۵۵</td><td class="n">+۱۰۰٪</td><td class="bar"><div class="b"><u style="width:66.7%"></u></div></td></tr><tr><td>۶۰٬۰۰۰</td><td class="n">۲۲۴٬۶۹۴</td><td class="n">+۱۵۰٪</td><td class="bar"><div class="b"><u style="width:83.3%"></u></div></td></tr><tr><td>۵۰٬۰۰۰</td><td class="n">۲۶۹٬۶۳۲</td><td class="n">+۲۰۰٪</td><td class="bar"><div class="b"><u style="width:100.0%"></u></div></td></tr></table></div>
+<p>کل سربار تقریباً ثابت فرض شده است (حقوق، بیمه، استهلاک و غیره). بنابراین با نصف‌شدن تولید، سربار هر واحد دو برابر می‌شود و اثر آن در قیمت‌گذاری قابل‌توجه است.</p>
+
+<h2>نکات و محدودیت‌های این مرحله</h2>
+<ul>
+<li>تولید یکسان محصولات فرض شده است. ترکیب واقعی تولید (محصولات پرزحمت‌تر یا گران‌تر) می‌تواند سهم سربار هر محصول را تغییر دهد و می‌توان در مرحله بعد مبنای تخصیص دیگری را هم بررسی کرد.</li>
+<li>آب و برق، اجاره، استهلاک و هزینه نگهداری در سردخانه در جمع کارگاه نیست. لازم است بررسی شود در «سربار و استهلاک تجهیزات» گزارش مالی آمده یا باید جداگانه اضافه شود، تا هم از قلم نیفتد و هم دوبار شمرده نشود.</li>
+<li>هزینه مالی، اثر تورم و خواب سرمایه هنوز در این اعداد لحاظ نشده است.</li>
+</ul>
+
+<h2>مرحله بعد</h2>
+<p>مرحله بعد، قیمت‌گذاری نهایی است: افزودن اثرات مالی، تورم و خواب سرمایه به بهای تمام‌شده بالا و تعیین حاشیه سود.</p>
+<div class="big">پیشنهاد می‌شود حتماً در رابطه با قیمت‌گذاری، نظرات بخش‌های مالی، مارکتینگ و تولید تجمیع شود.</div>
+</div>
+</body>
+</html>
